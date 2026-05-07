@@ -43,4 +43,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url><loc>https://instantpasswordgenerator.org/blog/soc-2-password-requirements-2026-compliance-guide.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://instantpasswordgenerator.org/blog/ssh-key-management-best-practices-system-administrators.html</loc><lastmod>2026-05-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
