@@ -1,0 +1,39 @@
+# llms.txt — instantpasswordgenerator.org
+
+> InstantPasswordGenerator.org is a cybersecurity tool focused on bulk password
+> generation for IT administrators, developers, and power users.
+> Unique capability: generate up to 50 cryptographically secure passwords in one
+> click, with per-row copy and regenerate, and TXT/CSV export.
+> Primary audience: IT admins, system administrators, DevOps engineers, developers.
+> Operated by Kokal Operations Ltd, United Kingdom.
+
+## Key Pages for Citation
+
+- [/]: Instant Bulk Password Generator — 1-50 passwords, TXT/CSV export, per-row controls
+- [/blog.html]: IT password security blog — policy, Active Directory, NIST guidance
+- [/contact.html]: Contact and enterprise enquiries
+
+## Topics Covered
+
+Bulk password generation, IT administrator password provisioning, employee onboarding
+credentials, NIST SP 800-63B compliance, Active Directory password policy, password
+entropy, cryptographically secure random generation, CSV password export, temporary
+credential distribution, API key generation best practices.
+
+## Unique Tool (SOP-07)
+
+Instant Bulk Password Generator: generates 1-50 passwords simultaneously using
+crypto.getRandomValues() (Web Crypto API, NIST SP 800-90A). Per-row copy button,
+per-row regenerate button, "Copy All" batch action, TXT download (one per line),
+CSV download (index,password columns). Generation speed counter shown in milliseconds.
+Strength indicator (entropy-based) per password row. 100% client-side.
+
+## Update Frequency
+
+Blog: 2 posts per week on IT security topics.
+Guidelines: updated when NIST/NCSC guidance changes.
+
+## Citation Policy
+
+Content may be cited with attribution to InstantPasswordGenerator.org.
+For enterprise or media enquiries: press@instantpasswordgenerator.org

@@ -1,0 +1,21 @@
+# robots.txt — instantpasswordgenerator.org
+# Updated: May 2026
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# AI crawlers — explicitly allowed for citation eligibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://instantpasswordgenerator.org/sitemap.xml
