@@ -1,4 +1,4 @@
-name: Validate HTML
+name: Validate Site
 on:
   push:
     branches: [main]
@@ -9,16 +9,48 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check internal links
+      - name: Check core files
         run: |
-          for file in *.html; do
-            grep -oP 'href="[^"#]+"' "$file" | grep -v 'http' | grep -v 'mailto' | sed 's/href="//;s/"//' | while read link; do
-              [ ! -f "$link" ] && echo "WARNING: Broken link in $file — $link"
-            done
-          done
-          echo "Link check complete."
-      - name: Verify required files
-        run: |
-          for f in index.html blog.html contact.html privacy-policy.html affiliate-disclosure.html terms.html cookie-policy.html 404.html robots.txt llms.txt sitemap.xml post.json; do
+          for f in index.html blog.html contact.html privacy-policy.html affiliate-disclosure.html terms.html cookie-policy.html 404.html robots.txt llms.txt sitemap.xml post.json README.md .github/workflows/update-sitemap.yml .github/workflows/validate-html.yml; do
             [ ! -f "$f" ] && echo "MISSING: $f" && exit 1 || echo "OK: $f"
           done
+      - name: Check blog posts have individual HTML files
+        run: |
+          for slug in "bulk-password-generation-active-directory" "powershell-bulk-password-scripts" "nist-800-63b-2025-it-admin-guide" "csv-password-pipelines-iam-import" "enterprise-password-reset-automation" "entropy-length-beats-complexity"; do
+            [ ! -f "blog/${slug}.html" ] && echo "MISSING: blog/${slug}.html" && exit 1 || echo "OK: blog/${slug}.html"
+          done
+      - name: Validate blog posts have canonical URLs
+        run: |
+          for f in blog/*.html; do
+            grep -q 'rel="canonical"' "$f" || { echo "MISSING canonical: $f"; exit 1; }
+            grep -q 'TechArticle' "$f" || { echo "MISSING Article schema: $f"; exit 1; }
+            grep -q 'BreadcrumbList' "$f" || { echo "MISSING BreadcrumbList schema: $f"; exit 1; }
+            echo "OK: $f"
+          done
+      - name: Validate post.json structure
+        run: |
+          python3 -c "
+import json
+with open('post.json') as f: d=json.load(f)
+posts=d.get('posts',[])
+assert len(posts)==6, f'Expected 6 posts, got {len(posts)}'
+featured=[p for p in posts if p.get('featured')]
+assert len(featured)==1, f'Expected 1 featured, got {len(featured)}'
+for p in posts:
+    assert 'url' in p and p['url'].startswith('/blog/'), f'Post missing /blog/ url: {p.get("slug")}'
+print(f'post.json valid: {len(posts)} posts, 1 featured')
+"
+      - name: blog.html must NOT use openP() modal
+        run: |
+          grep -q 'openP(' blog.html && echo 'ERROR: blog.html uses modal openP()' && exit 1 || echo 'OK: no modal pattern'
+      - name: sitemap.xml must include blog post URLs
+        run: |
+          count=$(grep -c '/blog/' sitemap.xml || echo 0)
+          [ "$count" -lt 6 ] && echo "ERROR: sitemap has $count /blog/ URLs (need 6+)" && exit 1
+          echo "OK: sitemap has $count /blog/ URLs"
+      - name: Affiliate links must have nofollow sponsored
+        run: |
+          if grep -q 'affiliate' index.html; then
+            grep -q 'nofollow sponsored' index.html || echo "WARN: affiliate links missing rel=nofollow sponsored"
+          fi
+          echo "Affiliate check done"

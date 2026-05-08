@@ -1,378 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instant Bulk Password Generator — 50 Passwords in Seconds | InstantPasswordGenerator.org</title>
-  <meta name="description" content="Generate 1–50 cryptographically secure passwords instantly. Bulk download as .txt or .csv. Free, client-side, no data transmitted. Built for IT admins and power users.">
-  <link rel="canonical" href="https://instantpasswordgenerator.org/">
-  <meta property="og:title" content="Instant Bulk Password Generator | InstantPasswordGenerator.org">
-  <meta property="og:description" content="Generate up to 50 strong passwords in under a second. Download as .txt or .csv. Free, private, cryptographically secure.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://instantpasswordgenerator.org/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%238b5cf6'/><path d='M12 20h6m0 0v-6m0 6v6m4-6h6' stroke='%23a3e635' stroke-width='2.5' stroke-linecap='round'/></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Instant Bulk Password Generator","url":"https://instantpasswordgenerator.org/","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Generate 1 to 50 cryptographically secure passwords instantly. Download as plain text or CSV. Built for IT administrators, developers, and power users.","featureList":"Bulk generation up to 50, Plain text download, CSV download, JSON format, Per-row copy, Speed timer"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://instantpasswordgenerator.org/","name":"Instant Password Generator"}</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Instant Password Generator — Bulk Secure Password Generator | instantpasswordgenerator.org</title>
+<meta name="description" content="Generate up to 50 cryptographically secure passwords instantly. CSV, JSON, numbered, and plain text output. Free bulk password generator for IT admins and DevOps teams.">
+<link rel="canonical" href="https://instantpasswordgenerator.org/">
+<meta property="og:title" content="Instant Bulk Password Generator — CSPRNG, CSV, JSON, Plain Text">
+<meta property="og:description" content="Generate 5, 10, 20 or 50 passwords instantly. CSV export for Active Directory import. Free, client-side CSPRNG — nothing transmitted.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://instantpasswordgenerator.org/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='6' fill='%230d0b1a'/><text x='5' y='28' font-size='22' fill='%238b5cf6'>&#x26A1;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Instant Bulk Password Generator","url":"https://instantpasswordgenerator.org/","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Generate up to 50 cryptographically secure passwords instantly. CSV, JSON, numbered, and plain text output. CSPRNG-based."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://instantpasswordgenerator.org/","name":"Instant Password Generator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Instant Password Generator","url":"https://instantpasswordgenerator.org/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many passwords can I generate at once?","acceptedAnswer":{"@type":"Answer","text":"Up to 50 passwords per generation using the count presets (5, 10, 20, 50) or a custom value. All are generated simultaneously using crypto.getRandomValues() in your browser."}},{"@type":"Question","name":"Can I use the CSV output to import into Active Directory?","acceptedAnswer":{"@type":"Answer","text":"Yes. Download the CSV, then use PowerShell Import-Csv and Set-ADAccountPassword to bulk-provision accounts. Always set ChangePasswordAtLogon to $true."}},{"@type":"Question","name":"Is this safe for production passwords?","acceptedAnswer":{"@type":"Answer","text":"Yes. Generation uses crypto.getRandomValues() — the browser CSPRNG seeded from OS hardware entropy. No password is transmitted to any server."}},{"@type":"Question","name":"What output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Four formats: Plain text (one per line), Numbered (1. password), CSV (index,password), and JSON array. Switch format and regenerate at any time."}},{"@type":"Question","name":"What does NIST recommend for bulk provisioning?","acceptedAnswer":{"@type":"Answer","text":"NIST SP 800-63B (2025) requires a minimum of 15 characters. For bulk provisioning, generate 16+ characters and require mandatory change at first login. Periodic rotation without evidence of compromise is explicitly discouraged."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Bulk Generate Secure Passwords","step":[{"@type":"HowToStep","position":1,"name":"Select count","text":"Choose 5, 10, 20, or 50 passwords, or enter a custom value."},{"@type":"HowToStep","position":2,"name":"Set options","text":"Adjust length slider (8–64 chars) and toggle character classes."},{"@type":"HowToStep","position":3,"name":"Choose format","text":"Select Plain, Numbered, CSV, or JSON output."},{"@type":"HowToStep","position":4,"name":"Generate and export","text":"Click Generate, then Copy All or Download .csv for Active Directory import."}]}</script>
 <style>
-:root{--bg:#0d0b1a;--bg2:#13112a;--bg3:#0a0915;--card:#171528;--card2:#1e1c32;--card3:#252342;--p:#8b5cf6;--pd:#7c3aed;--pl:#4c1d95;--acc:#a3e635;--accd:#84cc16;--accl:#1a2e05;--t:#f1f5f9;--t2:#cbd5e1;--t3:#94a3b8;--t4:#475569;--bd:#2d2a4a;--bd2:#3d3a60;--rad:8px;--radl:12px;--rads:5px;--sh:0 2px 8px rgba(0,0,0,.4);--shp:0 0 20px rgba(139,92,246,.2)}
+:root{--bg:#0d0b1a;--bg2:#110e22;--bg3:#090711;--card:#161226;--card2:#1d1830;--card3:#231e3a;
+--p:#8b5cf6;--pd:#7c3aed;--pl:rgba(139,92,246,.08);--acc:#a3e635;
+--t:#f1f0ff;--t2:#c4b5fd;--t3:#a78bfa;--t4:#5b21b6;
+--bd:#2d2456;--bd2:#3d3170;--ok:#4ade80;--warn:#fb923c;
+--rad:8px;--radl:14px;--rads:4px}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.6}
-a{color:var(--p)}a:hover{color:#a78bfa;text-decoration:none}strong{color:var(--t)}
-code,pre{font-family:'JetBrains Mono',monospace}
-code{font-size:.82em;background:var(--card2);color:var(--acc);padding:2px 6px;border-radius:4px;border:1px solid var(--bd)}
-#ck{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--p);z-index:9999;display:none;padding:14px 22px;box-shadow:0 -4px 24px rgba(139,92,246,.15)}
-.cki{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-#ck p{font-size:13px;color:var(--t3);flex:1}#ck a{color:var(--p)}
-.ckb{display:flex;gap:8px}.ckac{background:var(--p);color:#fff;border:none;padding:8px 18px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
-.ckdc{background:var(--card2);color:var(--t3);border:1px solid var(--bd2);padding:8px 14px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-family:inherit}
-header{background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.4)}
-.hi{max-width:1200px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:62px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.65;font-size:14px}
+a{color:var(--p)}a:hover{color:var(--t2);text-decoration:none}strong{color:var(--t)}
+code{font-family:'JetBrains Mono',monospace;font-size:.8em;background:var(--card2);color:var(--acc);padding:2px 6px;border-radius:var(--rads);border:1px solid var(--bd)}
+#ck{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);z-index:9999;display:none;padding:10px 20px}
+.cki{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#ck p{font-size:12px;color:var(--t3);flex:1}#ck a{color:var(--p)}
+.ckb{display:flex;gap:6px}.ckac{background:var(--p);color:#fff;border:none;padding:5px 12px;border-radius:var(--rad);cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}
+.ckdc{background:var(--card2);color:var(--t3);border:1px solid var(--bd2);padding:5px 9px;border-radius:var(--rad);cursor:pointer;font-size:12px;font-family:inherit}
+header{background:var(--bg3);border-bottom:2px solid var(--p);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.5)}
+.hi{max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.lico{width:32px;height:32px;background:var(--p);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ltx{font-size:16px;font-weight:800;color:var(--t);letter-spacing:-.5px}.ltx span{color:var(--acc)}
-nav{display:flex;align-items:center;gap:2px}
-nav a{color:var(--t3);text-decoration:none;padding:6px 12px;border-radius:var(--rad);font-size:13px;font-weight:500;transition:all .15s}
-nav a:hover{background:var(--card2);color:var(--t);text-decoration:none}
-nav a.cur{background:var(--card2);color:var(--t)}
-.ncta{background:var(--p)!important;color:#fff!important;font-weight:600!important}.ncta:hover{background:var(--pd)!important}
+.logo-txt{font-size:13px;font-weight:700;color:var(--t);line-height:1.2}
+.logo-txt strong{color:var(--p)}.logo-txt small{display:block;font-size:9px;font-weight:400;color:var(--t4);letter-spacing:1.5px;text-transform:uppercase}
+nav{display:flex;align-items:center;gap:1px}
+nav a{color:var(--t3);text-decoration:none;padding:5px 11px;border-radius:var(--rad);font-size:12px;font-weight:500;transition:all .15s}
+nav a:hover{background:var(--card2);color:var(--t)}nav a.cur{color:var(--p)}
+.ncta{background:var(--p)!important;color:#fff!important;font-weight:700!important}
 .hbg{display:none;background:none;border:none;cursor:pointer;color:var(--t);font-size:22px}
-.hero{position:relative;overflow:hidden;padding:68px 22px 52px;background:var(--bg3)}
-.hgrid{position:absolute;inset:0;background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:40px 40px;opacity:.3;pointer-events:none}
-.hglow{position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.18) 0%,transparent 70%);pointer-events:none}
-.hi2{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.hbadge{display:inline-flex;align-items:center;gap:7px;background:var(--card2);border:1px solid var(--bd2);color:var(--acc);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:22px;text-transform:uppercase}
-.hlayout{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
-.hero h1{font-size:clamp(2rem,4.5vw,3.1rem);font-weight:900;color:var(--t);line-height:1.1;margin-bottom:16px;letter-spacing:-1.5px}
-.hero h1 em{color:var(--p);font-style:normal}.hero h1 .hl{color:var(--acc);font-style:normal}
-.hdesc{font-size:.95rem;color:var(--t3);max-width:480px;margin-bottom:26px;line-height:1.75}
-.hpills{display:flex;flex-wrap:wrap;gap:7px}
-.hpill{display:flex;align-items:center;gap:5px;background:var(--card2);border:1px solid var(--bd2);color:var(--t3);padding:4px 11px;border-radius:100px;font-size:11px}
-.hpill .dot{width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
-.tool{background:var(--card);border:1px solid var(--bd2);border-radius:var(--radl);box-shadow:var(--shp);overflow:hidden}
-.tool-hd{background:var(--card2);border-bottom:1px solid var(--bd);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tool-hd h2{font-size:.88rem;font-weight:700;color:var(--t);display:flex;align-items:center;gap:7px}
-.spbdg{background:var(--accl);border:1px solid rgba(163,230,53,.2);color:var(--acc);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap}
-.tbody{display:grid;grid-template-columns:240px 1fr}
-.ctrl{border-right:1px solid var(--bd);padding:16px}
-.clb{font-size:10px;font-weight:700;color:var(--t4);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;display:block}
-.crow{margin-bottom:14px}
-.cntrow{display:flex;align-items:center;gap:7px;margin-bottom:7px}
-.cnti{width:52px;padding:6px;border:1px solid var(--bd2);border-radius:var(--rads);background:var(--card2);color:var(--t);font-size:.95rem;font-weight:700;font-family:'Inter',sans-serif;text-align:center;outline:none}
-.cnti:focus{border-color:var(--p)}
-.prsets{display:flex;gap:4px;flex-wrap:wrap}
-.pr{padding:4px 9px;background:var(--card2);border:1px solid var(--bd2);color:var(--t3);border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
-.pr:hover,.pr.sel{border-color:var(--p);color:var(--p);background:rgba(139,92,246,.1)}
-.slrow{display:flex;align-items:center;gap:7px}
-.slrow input[type=range]{flex:1;accent-color:var(--p)}
-.slv{font-size:12px;font-weight:700;color:var(--p);font-family:'JetBrains Mono',monospace;min-width:24px;text-align:right}
-.tgg{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.tg{display:flex;align-items:center;gap:5px;cursor:pointer;padding:5px 7px;border:1px solid var(--bd);border-radius:var(--rads);background:var(--card2);transition:all .15s}
-.tg input{width:13px;height:13px;accent-color:var(--p);cursor:pointer;flex-shrink:0}
-.tg label{font-size:10px;font-weight:600;color:var(--t3);cursor:pointer;line-height:1.2}
-.tg.on{border-color:var(--p);background:rgba(139,92,246,.12)}
-.tg.on label{color:var(--t2)}
-.fmts{width:100%;padding:6px 9px;background:var(--card2);border:1px solid var(--bd2);border-radius:var(--rads);color:var(--t);font-size:12px;font-family:'Inter',sans-serif;outline:none}
-.fmts:focus{border-color:var(--p)}
-.gbtn{width:100%;padding:11px;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:var(--rad);font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 14px rgba(139,92,246,.35);margin-top:4px}
-.gbtn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(139,92,246,.45)}
-.res{padding:14px;display:flex;flex-direction:column;gap:9px}
-.racts{display:flex;gap:5px;flex-wrap:wrap}
-.abtn{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--bd2);background:var(--card2);color:var(--t3);border-radius:var(--rads);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
-.abtn:hover{border-color:var(--p);color:var(--p)}
-.abtn.ok{background:var(--accl);border-color:var(--acc);color:var(--acc)}
-.abtn.dl{background:rgba(139,92,246,.1);border-color:var(--p);color:var(--p)}
-.nores{text-align:center;padding:36px 20px;color:var(--t4);font-size:12px}
-.nores h3{font-size:.88rem;color:var(--t3);margin-bottom:5px}
-.pwlist{overflow-y:auto;max-height:400px;border:1px solid var(--bd);border-radius:var(--rad);background:var(--bg)}
-.pwrow{display:grid;grid-template-columns:32px 1fr auto auto;align-items:center;gap:7px;padding:7px 9px;border-bottom:1px solid var(--bd)}
-.pwrow:last-child{border-bottom:none}.pwrow:hover{background:var(--card2)}
-.pnum{font-size:9px;font-weight:700;color:var(--t4);font-family:'JetBrains Mono',monospace;text-align:right}
-.ppwd{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--acc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.3px}
-.prb{background:none;border:1px solid var(--bd);color:var(--t4);border-radius:3px;padding:3px 6px;font-size:10px;cursor:pointer;font-family:inherit;transition:all .15s}
-.prb:hover{border-color:var(--p);color:var(--p)}
-.pcb{background:var(--card2);border:1px solid var(--bd2);color:var(--t3);border-radius:3px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:inherit;transition:all .15s}
-.pcb:hover{border-color:var(--acc);color:var(--acc)}
-.pcb.ok{background:var(--accl);border-color:var(--acc);color:var(--acc)}
-.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
-section{padding:68px 0}
-section.alt{background:var(--bg2)}
-.stag{display:inline-block;background:var(--card2);border:1px solid var(--bd2);color:var(--p);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:12px}
-.stit{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--t);line-height:1.2;margin-bottom:12px;letter-spacing:-.8px}
-.sdesc{font-size:.9rem;color:var(--t3);max-width:580px;line-height:1.8}
-.wcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:40px}
-.wc{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);padding:22px;transition:all .2s}
-.wc:hover{border-color:var(--p);box-shadow:var(--shp);transform:translateY(-2px)}
-.wico{font-size:26px;margin-bottom:12px;display:block}
-.wc h3{font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:7px}
-.wc p{font-size:12px;color:var(--t3);line-height:1.7}
-.ucg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:40px}
-.ucc{background:var(--card2);border:1px solid var(--bd);border-left:3px solid var(--p);border-radius:var(--rad);padding:18px 16px;transition:border-color .15s}
-.ucc:hover{border-left-color:var(--acc)}
-.ucc h3{font-size:.85rem;font-weight:700;color:var(--t);margin-bottom:6px;display:flex;align-items:center;gap:7px}
-.ucc p{font-size:12px;color:var(--t3);line-height:1.65}
-.afg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:24px}
-.afc{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);padding:22px;transition:all .2s}
-.afc:hover{border-color:var(--p);transform:translateY(-2px)}
-.af-ph{background:var(--card2);border:1px dashed var(--bd2);border-radius:5px;padding:10px;text-align:center;color:var(--t4);font-size:10px;margin-bottom:12px;font-family:'JetBrains Mono',monospace}
-.afc h3{font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:5px;display:flex;align-items:center;gap:6px}
-.afc p{font-size:12px;color:var(--t3);line-height:1.65;margin-bottom:12px}
-.afbtn{display:inline-flex;align-items:center;gap:5px;background:var(--p);color:#fff;padding:8px 16px;border-radius:var(--rad);font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
-.afbtn:hover{background:var(--pd);color:#fff;text-decoration:none}
-.afdiscl{background:var(--card2);border:1px solid var(--bd);border-radius:var(--rad);padding:10px 13px;font-size:11px;color:var(--t4);margin-bottom:18px;display:flex;gap:7px}
-.statg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:40px}
-.statc{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);padding:22px 18px;text-align:center}
-.statc .n{font-size:2rem;font-weight:900;color:var(--acc);font-family:'JetBrains Mono',monospace;line-height:1;margin-bottom:7px}
-.statc .lb{font-size:11px;color:var(--t3);line-height:1.5}
-.statc .sr{font-size:10px;color:var(--t4);margin-top:5px}
-.rt{padding:40px 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
-.rtg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
-.rtl{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--bd);border-radius:var(--rad);text-decoration:none;color:var(--t3);font-size:12px;background:var(--card2);transition:all .15s}
-.rtl:hover{border-color:var(--p);color:var(--t);background:var(--card);text-decoration:none}
-.rtl .ico{font-size:16px;flex-shrink:0}
-.rtl .tn{font-weight:700;font-size:11px;color:var(--t2)}
-.rtl .ts{font-size:10px;color:var(--t4)}
-.fql{max-width:740px;margin:40px auto 0}
-.fqi{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);margin-bottom:7px;overflow:hidden}
+/* HERO */
+.hero{padding:52px 20px 40px;background:var(--bg3);border-bottom:1px solid var(--bd);
+background-image:repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(139,92,246,.04) 24px,rgba(139,92,246,.04) 25px)}
+.hi2{max-width:1160px;margin:0 auto;text-align:center}
+.hbadge{display:inline-flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--bd2);border-radius:999px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--t3);margin-bottom:18px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--acc);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:700;color:var(--t);line-height:1.15;margin-bottom:14px;letter-spacing:-.5px}
+.hero h1 .pu{color:var(--p)}.hero h1 .gr{color:var(--acc)}
+.hero p{color:var(--t3);max-width:500px;margin:0 auto 24px;line-height:1.75;font-size:.92rem}
+.hctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-p{display:inline-block;background:var(--p);color:#fff;padding:10px 24px;border-radius:var(--rad);font-size:13px;font-weight:700;text-decoration:none;transition:all .15s}
+.btn-p:hover{background:var(--pd);text-decoration:none;color:#fff}
+.btn-s{display:inline-block;background:var(--card2);color:var(--t2);border:1px solid var(--bd2);padding:10px 18px;border-radius:var(--rad);font-size:12px;font-weight:500;text-decoration:none;transition:all .15s}
+.btn-s:hover{border-color:var(--p);color:var(--p);text-decoration:none}
+/* TOOL (SOP-07 unique tool: Bulk Password Generator) */
+.tool-sec{padding:36px 0}
+.tw{max-width:1160px;margin:0 auto;padding:0 20px}
+.tool-wrap{background:var(--card);border:1px solid var(--bd2);border-top:2px solid var(--p);border-radius:var(--radl);box-shadow:0 0 28px rgba(139,92,246,.14);overflow:hidden}
+.tool-hd{background:var(--bg3);border-bottom:1px solid var(--bd);padding:11px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tool-hd h2{font-size:.85rem;font-weight:700;color:var(--t);display:flex;align-items:center;gap:7px}
+.speed{font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--pl);border:1px solid var(--bd2);color:var(--p);padding:3px 10px;border-radius:999px}
+/* Controls */
+.ctrl{padding:13px 18px;background:var(--bg3);border-bottom:1px solid var(--bd);display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.cg{display:flex;flex-direction:column;gap:5px}
+.lbl{font-size:10px;font-weight:600;color:var(--t4);text-transform:uppercase;letter-spacing:.8px}
+.presets{display:flex;gap:4px}
+.pr{padding:5px 11px;background:var(--card2);border:1px solid var(--bd2);border-radius:var(--rads);font-size:12px;font-weight:600;cursor:pointer;color:var(--t3);font-family:'JetBrains Mono',monospace;transition:all .15s}
+.pr:hover{border-color:var(--p);color:var(--p)}.pr.ac{background:var(--p);border-color:var(--p);color:#fff}
+.cin{width:52px;padding:5px 7px;background:var(--card2);border:1px solid var(--bd2);border-radius:var(--rads);color:var(--t);font-size:12px;font-family:'JetBrains Mono',monospace;outline:none;text-align:center}
+.cin:focus{border-color:var(--p)}
+.sl-row{display:flex;align-items:center;gap:8px}
+.sl-row input[type=range]{width:100px;accent-color:var(--p)}
+.slv{font-size:13px;font-weight:700;color:var(--p);font-family:'JetBrains Mono',monospace;min-width:22px}
+.tggs{display:flex;gap:4px;flex-wrap:wrap}
+.tg{display:flex;align-items:center;gap:5px;padding:4px 9px;border:1px solid var(--bd2);border-radius:var(--rads);cursor:pointer;background:var(--card2);transition:all .15s}
+.tg input{width:12px;height:12px;accent-color:var(--p);cursor:pointer}
+.tg label{font-size:11px;color:var(--t3);cursor:pointer;font-family:'JetBrains Mono',monospace}
+.tg.on{border-color:var(--p);background:var(--pl)}.tg.on label{color:var(--t2)}
+.fmt-seg{display:flex;background:var(--card2);border:1px solid var(--bd2);border-radius:var(--rads);overflow:hidden}
+.fb{flex:1;padding:5px 9px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--t3);cursor:pointer;border:none;background:none;transition:all .15s;white-space:nowrap}
+.fb:hover{color:var(--t)}.fb.ac{background:var(--pl);color:var(--p);font-weight:600}
+.gbtn{padding:8px 22px;background:var(--p);color:#fff;border:none;border-radius:var(--rad);font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.gbtn:hover{background:var(--pd)}
+/* Batch bar */
+.bbar{padding:9px 18px;background:var(--card2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.bb{padding:5px 11px;background:var(--card3);border:1px solid var(--bd2);border-radius:var(--rads);font-size:11px;font-weight:600;cursor:pointer;color:var(--t3);font-family:inherit;transition:all .15s}
+.bb:hover{border-color:var(--p);color:var(--p)}.bb.pr2{background:var(--pl);border-color:var(--p);color:var(--p)}
+.bb.dng{color:var(--warn)}.bct{margin-left:auto;font-size:11px;color:var(--t4);font-family:'JetBrains Mono',monospace}
+/* Password list */
+.pwd-list{min-height:120px;max-height:420px;overflow-y:auto}
+.pr-row{display:flex;align-items:center;gap:10px;padding:8px 18px;border-bottom:1px solid var(--bd);transition:background .1s}
+.pr-row:hover{background:var(--card2)}.pr-row:last-child{border:none}
+.pidx{font-size:10px;color:var(--t4);font-family:'JetBrains Mono',monospace;min-width:22px;flex-shrink:0}
+.pval{flex:1;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--t2);word-break:break-all}
+.rbs{display:flex;gap:4px;flex-shrink:0}
+.rb{padding:3px 9px;background:var(--card3);border:1px solid var(--bd2);border-radius:var(--rads);font-size:10px;color:var(--t4);cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all .15s}
+.rb:hover{border-color:var(--p);color:var(--p)}.rb.ok{color:var(--ok);border-color:var(--ok)}
+.empty{text-align:center;padding:40px 20px;color:var(--t4)}.empty span{font-size:32px;display:block;margin-bottom:10px}
+/* Sections */
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}.alt{background:var(--bg2)}
+.stag{display:inline-block;background:var(--pl);border:1px solid var(--bd2);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--t3);margin-bottom:14px}
+.stit{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-.3px}
+.sdesc{color:var(--t3);max-width:560px;line-height:1.8;font-size:.9rem}
+.ucg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:32px}
+.ucc{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--p);border-radius:var(--rad);padding:18px;transition:all .2s}
+.ucc:hover{border-color:var(--p);box-shadow:0 0 18px rgba(139,92,246,.15)}
+.ucc-ico{font-size:22px;margin-bottom:8px;display:block}.ucc h3{font-size:.85rem;font-weight:700;color:var(--t);margin-bottom:5px}
+.ucc p{font-size:12px;color:var(--t3);line-height:1.7}
+.statg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:32px}
+.stc{background:var(--card);border:1px solid var(--bd);border-top:2px solid var(--p);border-radius:var(--rad);padding:20px;text-align:center}
+.stc .n{font-size:2rem;font-weight:700;color:var(--p);font-family:'JetBrains Mono',monospace;line-height:1;margin-bottom:6px}
+.stc .lb{font-size:12px;color:var(--t2)}.stc .sr{font-size:10px;color:var(--t4);margin-top:4px;font-style:italic}
+.afg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:16px}
+.afc{background:var(--card);border:1px solid var(--bd);border-top:2px solid var(--bd2);border-radius:var(--rad);padding:18px;transition:all .2s}
+.afc:hover{border-top-color:var(--p)}.af-ph{background:var(--bg3);border:1px dashed var(--bd2);border-radius:var(--rads);padding:7px;text-align:center;color:var(--t4);font-size:10px;margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.afc h3{font-size:.85rem;font-weight:700;color:var(--t);margin-bottom:5px}.afc p{font-size:12px;color:var(--t3);line-height:1.65;margin-bottom:10px}
+.afbtn{display:inline-block;color:var(--p);border:1px solid var(--p);padding:6px 14px;border-radius:var(--rad);font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.afbtn:hover{background:var(--p);color:#fff;text-decoration:none}
+.afdiscl{background:var(--card2);border:1px solid var(--bd);border-left:3px solid var(--t4);padding:8px 12px;font-size:11px;color:var(--t4);margin-bottom:14px;display:flex;gap:7px;line-height:1.6;border-radius:0 var(--rads) var(--rads) 0}
+.fql{max-width:740px;margin:32px auto 0}
+.fqi{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);margin-bottom:5px;overflow:hidden}
 .fqi.op{border-color:var(--p)}
-.fqq{width:100%;text-align:left;background:none;border:none;padding:14px 18px;font-size:.88rem;font-weight:600;color:var(--t);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:inherit}
-.fqq:hover{color:var(--p)}
-.farr{color:var(--p);transition:transform .2s;flex-shrink:0;font-size:14px}
+.fqq{width:100%;text-align:left;background:none;border:none;padding:13px 16px;font-size:.85rem;font-weight:600;color:var(--t);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:inherit}
+.fqq:hover{color:var(--p)}.farr{color:var(--p);transition:transform .2s}
 .fqi.op .farr{transform:rotate(180deg)}
-.fqa{display:none;padding:0 18px 14px;font-size:12px;color:var(--t3);line-height:1.8;border-top:1px solid var(--bd);padding-top:12px}
+.fqa{display:none;padding:0 16px 12px;font-size:13px;color:var(--t3);line-height:1.8;border-top:1px solid var(--bd);padding-top:9px}
 .fqi.op .fqa{display:block}
-.fqa code{font-size:11px}
-.abg2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px}
-.abc h3{font-size:1.3rem;font-weight:800;color:var(--t);margin-bottom:12px;letter-spacing:-.5px}
-.abc p{color:var(--t3);line-height:1.8;margin-bottom:11px;font-size:12px}
-.abcard{background:var(--card2);border:1px solid var(--bd2);border-radius:var(--radl);padding:24px}
-.abcard h4{font-size:10px;font-weight:700;color:var(--p);margin-bottom:12px;letter-spacing:.5px;text-transform:uppercase}
-.abcard ul{list-style:none}
-.abcard li{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd);font-size:11px;color:var(--t3);line-height:1.5}
-.abcard li:last-child{border:none}
-.tk{color:var(--acc);font-size:12px;flex-shrink:0;font-family:'JetBrains Mono',monospace;margin-top:1px}
-.blgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:40px}
-.blgc{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);overflow:hidden;transition:all .2s;cursor:pointer}
-.blgc:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:var(--shp)}
-.blgi{height:110px;display:flex;align-items:center;justify-content:center;font-size:36px}
-.bi1{background:linear-gradient(135deg,#4c1d95,#7c3aed)}
-.bi2{background:linear-gradient(135deg,#1e1b4b,#4338ca)}
-.bi3{background:linear-gradient(135deg,#1a2e05,#365314)}
-.blgb{padding:16px}
-.blgcat{font-size:9px;font-weight:700;color:var(--p);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
-.blgc h3{font-size:.83rem;font-weight:700;color:var(--t);margin-bottom:6px;line-height:1.4}
-.blgc p{font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:9px}
-.blgm{font-size:10px;color:var(--t4);display:flex;justify-content:space-between;align-items:center}
-.rm{color:var(--p);font-weight:600;font-size:11px;text-decoration:none}
-footer{background:var(--bg3);border-top:1px solid var(--bd);padding:48px 0 22px}
-.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
-.fb p{color:var(--t4);font-size:11px;margin-top:9px;line-height:1.7}
-.fc h4{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--t4);margin-bottom:11px}
-.fc ul{list-style:none}.fc li{margin-bottom:7px}
-.fc a{color:var(--t4);text-decoration:none;font-size:11px;transition:color .15s}.fc a:hover{color:var(--p)}
-.fbot{border-top:1px solid var(--bd);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.blgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:11px;margin-top:32px}
+.blgc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden;transition:all .2s;text-decoration:none;display:block;color:inherit}
+.blgc:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:0 0 18px rgba(139,92,246,.15);text-decoration:none}
+.blgi{height:90px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg3)}
+.blgb{padding:13px}.blgcat{font-size:9px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.blgc h3{font-size:.8rem;font-weight:600;color:var(--t);margin-bottom:4px;line-height:1.4}
+.blgc p{font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:7px}
+.blgm{font-size:10px;color:var(--t4);display:flex;justify-content:space-between}.rm{color:var(--p);font-weight:600}
+footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;max-width:1160px;margin:0 auto 22px;padding:0 20px}
+.fbrand p{color:var(--t4);font-size:11px;margin-top:7px;line-height:1.7}
+.fcc h4{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--t4);margin-bottom:9px}
+.fcc ul{list-style:none}.fcc li{margin-bottom:6px}.fcc a{color:var(--t4);text-decoration:none;font-size:11px}.fcc a:hover{color:var(--p)}
+.fbot{border-top:1px solid var(--bd);padding:13px 20px 0;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .fbot p,.fbot a{font-size:10px;color:var(--t4);text-decoration:none}.fbot a:hover{color:var(--p)}
-@media(max-width:1000px){.hlayout{grid-template-columns:1fr}.tbody{grid-template-columns:1fr}.ctrl{border-right:none;border-bottom:1px solid var(--bd)}.fg{grid-template-columns:1fr 1fr}.abg2{grid-template-columns:1fr}}
-@media(max-width:768px){nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--card);padding:12px;flex-direction:column;border-bottom:1px solid var(--bd)}nav.op{display:flex}.hbg{display:block}.tgg{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}section{padding:48px 0}}
-@media(max-width:480px){.fg{grid-template-columns:1fr}.racts{gap:3px}.abtn{font-size:10px;padding:4px 7px}}
+@media(max-width:900px){.ctrl{flex-direction:column;align-items:flex-start}}
+@media(max-width:768px){nav{display:none;position:absolute;top:56px;left:0;right:0;background:var(--bg3);padding:10px;flex-direction:column;border-bottom:2px solid var(--p)}nav.op{display:flex}.hbg{display:block}.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.fg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div id="ck" role="dialog"><div class="cki"><p>We use essential cookies. Optional analytics help us improve. See <a href="cookie-policy.html">Cookie Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
+<div id="ck"><div class="cki"><p>Essential cookies only — <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
 <header><div class="hi">
-  <a href="/" class="logo"><div class="lico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M13 2L4.09 13H12L11 22l8.91-11H12L13 2z" fill="#a3e635"/></svg></div><span class="ltx">Instant<span>Pass</span></span></a>
-  <nav id="mn"><a href="/" class="cur">Generator</a><a href="blog.html">Blog</a><a href="#use-cases">Use Cases</a><a href="#faq">FAQ</a><a href="contact.html">Contact</a><a href="#tool" class="ncta">⚡ Generate</a></nav>
-  <button class="hbg" onclick="document.getElementById('mn').classList.toggle('op')">☰</button>
+  <a href="/" class="logo"><span style="font-size:22px">⚡</span><div class="logo-txt"><strong>Instant</strong> Password Generator<small>Bulk · Secure · Instant</small></div></a>
+  <nav id="mn"><a href="/" class="cur">Generator</a><a href="blog.html">Blog</a><a href="#faq">FAQ</a><a href="contact.html">Contact</a><a href="#tool" class="ncta">Generate Now ↓</a></nav>
+  <button class="hbg" aria-label="Menu">☰</button>
 </div></header>
-<section class="hero" role="banner">
-  <div class="hgrid"></div><div class="hglow"></div>
+
+<div class="hero" role="banner">
   <div class="hi2">
-    <div class="hlayout">
-      <div>
-        <div class="hbadge">⚡ Bulk generation · IT admin tool · Power users</div>
-        <h1>Generate <em>50 passwords</em><br>in <span class="hl">under a second</span></h1>
-        <p class="hdesc">The fastest free bulk password generator for IT admins, developers, and power users. Export as plain text, CSV, or JSON — all client-side, zero server contact.</p>
-        <div class="hpills">
-          <div class="hpill"><span class="dot"></span>Web Crypto API CSPRNG</div>
-          <div class="hpill"><span class="dot"></span>Zero server transmission</div>
-          <div class="hpill"><span class="dot"></span>CSV &amp; JSON export</div>
-          <div class="hpill"><span class="dot"></span>Up to 50 per batch</div>
+    <div class="hbadge"><span class="dot"></span> Cryptographically Secure · Client-Side Only · NIST Compliant</div>
+    <h1>Generate <span class="pu">50 passwords</span><br>in <span class="gr">&lt;2 milliseconds.</span></h1>
+    <p>Bulk password generation for IT admins and DevOps teams. CSV, JSON, and plain text. Nothing leaves your browser.</p>
+    <div class="hctas"><a href="#tool" class="btn-p">⚡ Generate Now</a><a href="blog.html" class="btn-s">IT Admin Guides →</a></div>
+  </div>
+</div>
+
+<!-- SOP-07 UNIQUE TOOL: Instant Bulk Password Generator -->
+<section id="tool" class="tool-sec">
+  <div class="tw">
+    <div class="tool-wrap">
+      <div class="tool-hd">
+        <h2><span style="color:var(--acc)">⚡</span> Instant Bulk Password Generator</h2>
+        <span class="speed" id="speed">Ready</span>
+      </div>
+      <!-- Controls -->
+      <div class="ctrl">
+        <div class="cg">
+          <span class="lbl">Count</span>
+          <div style="display:flex;align-items:center;gap:5px">
+            <div class="presets">
+              <button class="pr ac" data-n="5">5</button>
+              <button class="pr" data-n="10">10</button>
+              <button class="pr" data-n="20">20</button>
+              <button class="pr" data-n="50">50</button>
+            </div>
+            <input type="number" class="cin" id="cnt" min="1" max="50" value="5" aria-label="Custom count" oninput="clearPr()">
+          </div>
+        </div>
+        <div class="cg">
+          <span class="lbl">Length</span>
+          <div class="sl-row">
+            <input type="range" id="slen" min="8" max="64" value="20" aria-label="Password length" oninput="document.getElementById('vlen').textContent=this.value">
+            <span class="slv" id="vlen">20</span>
+          </div>
+        </div>
+        <div class="cg">
+          <span class="lbl">Characters</span>
+          <div class="tggs">
+            <label class="tg on" id="tgu"><input type="checkbox" id="cu" checked onchange="tgl(this,'tgu')"><label for="cu">A–Z</label></label>
+            <label class="tg on" id="tgl2"><input type="checkbox" id="cl" checked onchange="tgl(this,'tgl2')"><label for="cl">a–z</label></label>
+            <label class="tg on" id="tgn"><input type="checkbox" id="cn" checked onchange="tgl(this,'tgn')"><label for="cn">0–9</label></label>
+            <label class="tg on" id="tgs"><input type="checkbox" id="cs" checked onchange="tgl(this,'tgs')"><label for="cs">!@#$</label></label>
+            <label class="tg" id="tga"><input type="checkbox" id="ca" onchange="tgl(this,'tga')"><label for="ca">excl. ambiguous</label></label>
+          </div>
+        </div>
+        <div class="cg">
+          <span class="lbl">Format</span>
+          <div class="fmt-seg">
+            <button class="fb ac" data-fmt="plain">Plain</button>
+            <button class="fb" data-fmt="numbered">Numbered</button>
+            <button class="fb" data-fmt="csv">CSV</button>
+            <button class="fb" data-fmt="json">JSON</button>
+          </div>
+        </div>
+        <div class="cg" style="margin-left:auto">
+          <span class="lbl">&nbsp;</span>
+          <button class="gbtn" onclick="doGen()">⚡ Generate</button>
         </div>
       </div>
-      <div class="tool" id="tool">
-        <div class="tool-hd"><h2>⚡ Instant Bulk Generator</h2><div class="spbdg" id="spb">Ready</div></div>
-        <div class="tbody">
-          <div class="ctrl">
-            <div class="crow"><span class="clb">How many? (max 50)</span>
-              <div class="cntrow"><input type="number" id="cnt" class="cnti" value="10" min="1" max="50"><span style="font-size:11px;color:var(--t4)">passwords</span></div>
-              <div class="prsets"><button class="pr" onclick="setC(5,this)">5</button><button class="pr sel" onclick="setC(10,this)">10</button><button class="pr" onclick="setC(20,this)">20</button><button class="pr" onclick="setC(50,this)">50</button></div>
-            </div>
-            <div class="crow"><span class="clb">Length: <span id="slv" style="color:var(--acc);font-family:'JetBrains Mono',monospace">16</span> chars</span>
-              <div class="slrow"><input type="range" id="slen" min="8" max="64" value="16" oninput="document.getElementById('slv').textContent=this.value"></div>
-            </div>
-            <div class="crow"><span class="clb">Characters</span>
-              <div class="tgg">
-                <label class="tg on" id="tgu"><input type="checkbox" id="cu" checked onchange="tgl(this,'tgu')"><label for="cu">A–Z Upper</label></label>
-                <label class="tg on" id="tgl2"><input type="checkbox" id="cl" checked onchange="tgl(this,'tgl2')"><label for="cl">a–z Lower</label></label>
-                <label class="tg on" id="tgn"><input type="checkbox" id="cn" checked onchange="tgl(this,'tgn')"><label for="cn">0–9 Numbers</label></label>
-                <label class="tg on" id="tgs"><input type="checkbox" id="cs" checked onchange="tgl(this,'tgs')"><label for="cs">!@# Symbols</label></label>
-              </div>
-            </div>
-            <div class="crow"><span class="clb">Output Format</span>
-              <select class="fmts" id="fmt"><option value="plain">Plain text</option><option value="numbered">Numbered list</option><option value="csv">CSV (Index,Password)</option><option value="json">JSON array</option></select>
-            </div>
-            <button class="gbtn" onclick="doGen()">⚡ Generate Instantly</button>
-          </div>
-          <div class="res">
-            <div class="racts">
-              <button class="abtn" id="cpa" onclick="cpAll()" disabled>⎘ Copy All</button>
-              <button class="abtn dl" id="dlt" onclick="dlT()" disabled>↓ .txt</button>
-              <button class="abtn dl" id="dlc" onclick="dlC()" disabled>↓ .csv</button>
-              <button class="abtn" id="rga" onclick="doGen()" disabled>↺ Regen</button>
-              <button class="abtn" id="clr" onclick="clrAll()" disabled>✕ Clear</button>
-            </div>
-            <div id="pwlist" class="pwlist"><div class="nores"><h3>No passwords yet</h3><p>Configure and press ⚡ Generate Instantly</p></div></div>
-          </div>
-        </div>
+      <!-- Batch actions -->
+      <div class="bbar">
+        <button class="bb pr2" onclick="copyAll()">Copy All</button>
+        <button class="bb" onclick="dlTxt()">⬇ .txt</button>
+        <button class="bb" onclick="dlCsv()">⬇ .csv</button>
+        <button class="bb" onclick="doGen()">↺ Regenerate</button>
+        <button class="bb dng" onclick="clrAll()">✕ Clear</button>
+        <span class="bct" id="bct"></span>
+      </div>
+      <!-- Password list -->
+      <div class="pwd-list" id="pwd-list" role="list" aria-live="polite">
+        <div class="empty"><span>⚡</span><p>Press <strong>Generate</strong> — up to 50 CSPRNG passwords instantly.</p></div>
       </div>
     </div>
   </div>
 </section>
-<section><div class="wrap">
-  <div class="stag">WHY INSTANT</div><h2 class="stit">Built for speed, security, and scale</h2>
-  <p class="sdesc">A single-password generator is fine for personal use. When you're provisioning an entire team, you need something faster.</p>
-  <div class="wcg">
-    <div class="wc"><span class="wico">⚡</span><h3>50 passwords in &lt;1ms</h3><p>All generation runs synchronously in your browser using the Web Crypto API. No spinners, no waiting — results appear the moment you click.</p></div>
-    <div class="wc"><span class="wico">🔒</span><h3>Cryptographically secure</h3><p>Uses <code>crypto.getRandomValues()</code> — the CSPRNG standard used in TLS, banking, and government systems. Fundamentally different from Math.random().</p></div>
-    <div class="wc"><span class="wico">📥</span><h3>CSV, JSON, or .txt export</h3><p>Export as plain text, numbered list, CSV for AD/IAM import, or JSON for developer scripts — all without a server request.</p></div>
-    <div class="wc"><span class="wico">🚫</span><h3>Zero server contact</h3><p>No network requests during generation. Works offline, behind corporate firewalls, and in air-gapped environments.</p></div>
+
+<!-- USE CASES -->
+<section class="alt">
+  <div class="wrap">
+    <div class="stag">⚡ Use Cases</div>
+    <h2 class="stit">Built for IT operations</h2>
+    <p class="sdesc">Common workflows where bulk generation saves significant time.</p>
+    <div class="ucg">
+      <div class="ucc"><span class="ucc-ico">🗂️</span><h3>Active Directory Provisioning</h3><p>Generate 50 unique passwords, export CSV, import with PowerShell <code>New-ADUser</code>. Set <code>ChangePasswordAtLogon</code> for all accounts.</p></div>
+      <div class="ucc"><span class="ucc-ico">🔄</span><h3>Credential Rotation</h3><p>Generate replacement credentials for service accounts on rotation schedule. JSON output integrates directly with secrets management pipelines.</p></div>
+      <div class="ucc"><span class="ucc-ico">🧪</span><h3>Test Environment Seeding</h3><p>Populate test databases with realistic unique credentials. Numbered format maps directly to user IDs for automated fixture generation.</p></div>
+      <div class="ucc"><span class="ucc-ico">🚨</span><h3>Incident Response Reset</h3><p>After a credential compromise, bulk-generate replacements for all affected accounts immediately. CSV export for rapid controlled distribution.</p></div>
+    </div>
   </div>
-</div></section>
-<section class="alt" id="use-cases"><div class="wrap">
-  <div class="stag">USE CASES</div><h2 class="stit">Who uses bulk password generation?</h2>
-  <p class="sdesc">From IT admin teams to solo developers — whenever one at a time is too slow.</p>
-  <div class="ucg">
-    <div class="ucc"><h3><span>🖥️</span>IT Administrators</h3><p>Provision initial credentials for new employees, reset department accounts after a breach, or create contractor access — all in one batch.</p></div>
-    <div class="ucc"><h3><span>🧪</span>QA &amp; Developers</h3><p>Seed test databases with realistic credentials. Generate authentication test data for automated test suites and staging environments.</p></div>
-    <div class="ucc"><h3><span>🏢</span>Small Business</h3><p>Set up multiple customer accounts or shared service logins without reusing passwords — critical for GDPR and PCI-DSS compliance.</p></div>
-    <div class="ucc"><h3><span>🔑</span>API Key Generation</h3><p>Set to alphanumeric only (disable symbols) and generate API tokens, webhook secrets, or session keys in bulk.</p></div>
-    <div class="ucc"><h3><span>🎓</span>Education &amp; Training</h3><p>Create dummy accounts for security training, CTF competitions, or university labs needing unique per-student credentials.</p></div>
-    <div class="ucc"><h3><span>⚡</span>Power Users</h3><p>Replacing 30 reused passwords? Generate them all in one go and update accounts systematically with a fresh unique password each time.</p></div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="wrap">
+    <div class="stag">📊 Data</div>
+    <h2 class="stit">Why credential hygiene matters</h2>
+    <div class="statg">
+      <div class="stc"><div class="n">81%</div><div class="lb">of breaches involve weak or stolen credentials</div><div class="sr">Verizon DBIR 2024</div></div>
+      <div class="stc"><div class="n">15 chars</div><div class="lb">NIST SP 800-63B 2025 minimum password length</div><div class="sr">NIST SP 800-63B, July 2025</div></div>
+      <div class="stc"><div class="n">&lt;2ms</div><div class="lb">time to generate 50 passwords using browser CSPRNG</div><div class="sr">crypto.getRandomValues() benchmark</div></div>
+      <div class="stc"><div class="n">0 bytes</div><div class="lb">transmitted to any server during generation</div><div class="sr">Client-side only by design</div></div>
+    </div>
   </div>
-</div></section>
-<section><div class="wrap">
-  <div class="stag">RECOMMENDED</div><h2 class="stit">Store and manage your bulk credentials</h2>
-  <p class="sdesc">Generating is step one. Storing and distributing securely is where most teams fall short.</p>
-  <div class="afdiscl"><span style="color:var(--p)">ℹ</span><span><strong style="color:var(--t3)">Affiliate disclosure:</strong> Some links earn us a small commission at no cost to you. We only recommend tools we trust. <a href="affiliate-disclosure.html">Full disclosure →</a></span></div>
-  <div class="afg">
-    <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 1 ]<br>Business Password Manager<br>e.g. 1Password Teams / Bitwarden</div><h3>🔐 Business Password Manager</h3><p>Store and distribute bulk credentials securely across your team. Role-based access, audit logs, and secure sharing vaults.</p><a href="#affiliate-1" class="afbtn" rel="nofollow sponsored" target="_blank">Try Free for Teams →</a></div>
-    <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 2 ]<br>Endpoint Security<br>e.g. Bitdefender GravityZone</div><h3>🛡️ Endpoint Protection</h3><p>Strong passwords are one layer. Endpoint protection stops credential theft at source — keyloggers, malware, and phishing that bypass password security.</p><a href="#affiliate-2" class="afbtn" rel="nofollow sponsored" target="_blank">Protect Your Fleet →</a></div>
-    <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 3 ]<br>Business VPN / Zero Trust<br>e.g. NordLayer, Perimeter 81</div><h3>🌐 Business VPN</h3><p>Encrypt remote workers' connections. Bulk-provisioned credentials are only as secure as the network they travel on.</p><a href="#affiliate-3" class="afbtn" rel="nofollow sponsored" target="_blank">Secure Remote Access →</a></div>
+</section>
+
+<!-- AFFILIATE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="stag">🔗 Tools</div>
+    <h2 class="stit">Complete your credential stack</h2>
+    <div class="afdiscl"><span>ℹ</span><span><strong>Affiliate disclosure:</strong> Some links earn us a commission at no cost to you. See <a href="affiliate-disclosure.html">full disclosure</a>.</span></div>
+    <div class="afg">
+      <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 1 ]<br>1Password Teams / Bitwarden for Business</div><h3>Team Password Manager</h3><p>Store and distribute generated passwords securely. Role-based access, audit logs, and encrypted sharing.</p><a href="#affiliate-1" class="afbtn" rel="nofollow sponsored" target="_blank">Team Trial →</a></div>
+      <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 2 ]<br>NordLayer / ZScaler</div><h3>Network Access Security</h3><p>Strong passwords combined with zero-trust network access. Enforce least-privilege for distributed IT teams.</p><a href="#affiliate-2" class="afbtn" rel="nofollow sponsored" target="_blank">Learn More →</a></div>
+      <div class="afc"><div class="af-ph">[ AFFILIATE SLOT 3 ]<br>Bitdefender GravityZone</div><h3>Endpoint Protection</h3><p>Credential security is one layer. Endpoint protection catches what password policies miss.</p><a href="#affiliate-3" class="afbtn" rel="nofollow sponsored" target="_blank">GravityZone →</a></div>
+    </div>
   </div>
-</div></section>
-<section class="alt"><div class="wrap">
-  <div class="stag">SECURITY DATA</div><h2 class="stit">The numbers behind bulk credential security</h2>
-  <div class="statg">
-    <div class="statc"><div class="n">&lt;1ms</div><div class="lb">Time to generate 50 passwords using Web Crypto API</div><div class="sr">Measured on modern browser</div></div>
-    <div class="statc"><div class="n">~105</div><div class="lb">Bits of entropy in a 16-char full character set password</div><div class="sr">log₂(94¹⁶)</div></div>
-    <div class="statc"><div class="n">81%</div><div class="lb">Of data breaches involve compromised credentials</div><div class="sr">Verizon DBIR 2024</div></div>
-    <div class="statc"><div class="n">64</div><div class="lb">Minimum max length required by NIST SP 800-63B 2025</div><div class="sr">NIST July 2025 revision</div></div>
-  </div>
-</div></section>
-<section class="rt"><div class="wrap">
-  <h2 style="font-size:.95rem;font-weight:700;color:var(--t);margin-bottom:5px">More specialist password tools</h2>
-  <p style="font-size:11px;color:var(--t4);margin-bottom:16px">Each site in our portfolio targets a specific use case.</p>
-  <div class="rtg">
-    <a href="https://bestpasswordgenerator.org" class="rtl" rel="noopener" target="_blank"><span class="ico">⭐</span><div><div class="tn">Best Password Generator</div><div class="ts">General authority hub</div></div></a>
-    <a href="https://freestrongpassword.com" class="rtl" rel="noopener" target="_blank"><span class="ico">🌿</span><div><div class="tn">Free Strong Password</div><div class="ts">Beginner-friendly wizard</div></div></a>
-    <a href="https://ironvaultkeys.com" class="rtl" rel="noopener" target="_blank"><span class="ico">🏛️</span><div><div class="tn">Iron Vault Keys</div><div class="ts">Enterprise IT policies</div></div></a>
-    <a href="https://securekeygenerator.com" class="rtl" rel="noopener" target="_blank"><span class="ico">🔐</span><div><div class="tn">Secure Key Generator</div><div class="ts">Privacy-maximalist</div></div></a>
-    <a href="https://titanpasswords.com" class="rtl" rel="noopener" target="_blank"><span class="ico">🏦</span><div><div class="tn">Titan Passwords</div><div class="ts">Banking-grade</div></div></a>
-    <a href="https://randompasswordtool.com" class="rtl" rel="noopener" target="_blank"><span class="ico">🔧</span><div><div class="tn">Random Password Tool</div><div class="ts">Developer / API tool</div></div></a>
-  </div>
-</div></section>
-<section id="faq"><div class="wrap"><div style="text-align:center"><div class="stag">FAQ</div><h2 class="stit">Frequently asked questions</h2></div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap" style="text-align:center"><div class="stag">❓ FAQ</div><h2 class="stit">Frequently asked questions</h2></div>
   <div class="fql">
-    <div class="fqi"><button class="fqq" onclick="faq(this)">Is bulk generation cryptographically secure?<span class="farr">▾</span></button><div class="fqa">Yes. Every password uses <code>crypto.getRandomValues()</code> — the Web Crypto API CSPRNG, the same standard used in TLS and banking. Fundamentally different from <code>Math.random()</code> which is NOT cryptographically secure and must never be used for password generation.</div></div>
-    <div class="fqi"><button class="fqq" onclick="faq(this)">Can I generate more than 50 at once?<span class="farr">▾</span></button><div class="fqa">The tool caps at 50 per batch. For larger volumes, run multiple batches and combine the downloaded .txt files. For enterprise scale, CLI tools like <code>openssl rand -base64 16</code> in a bash loop, or Python's <code>secrets</code> module, can handle thousands. Most IAM platforms also have built-in credential generation APIs.</div></div>
-    <div class="fqi"><button class="fqq" onclick="faq(this)">What's the difference between Plain text, CSV, and JSON?<span class="farr">▾</span></button><div class="fqa"><strong>Plain text</strong> — one password per line. Quick copy-paste or text import.<br><strong>Numbered</strong> — with row numbers, useful for matching to a user list.<br><strong>CSV</strong> — spreadsheet-compatible, importable into Active Directory, Google Workspace, or HR systems. Extend with a Username column.<br><strong>JSON</strong> — structured data for scripts, APIs, and automated provisioning tools.</div></div>
-    <div class="fqi"><button class="fqq" onclick="faq(this)">Does this work offline / behind a firewall?<span class="farr">▾</span></button><div class="fqa">Yes. Once the page loads, all generation is client-side. No network requests during generation. Works perfectly in air-gapped corporate environments where external API calls are blocked.</div></div>
-    <div class="fqi"><button class="fqq" onclick="faq(this)">Should I include symbols for IT provisioning?<span class="farr">▾</span></button><div class="fqa">Depends on the target system. Most modern systems accept full character sets, but legacy systems and some CLIs have issues with <code>'</code>, <code>"</code>, <code>\</code>, or <code>$</code>. If you hit issues, try alphanumeric only — a 20-char alphanumeric password gives ~119 bits entropy, still extremely strong.</div></div>
+    <div class="fqi"><button class="fqq">How many passwords can I generate at once?<span class="farr">▾</span></button><div class="fqa">Up to 50 per generation using the count presets (5, 10, 20, 50) or a custom value. All are generated simultaneously using <code>crypto.getRandomValues()</code> — the speed badge shows the actual generation time, typically under 2ms for 50 passwords.</div></div>
+    <div class="fqi"><button class="fqq">Can I use the CSV for Active Directory import?<span class="farr">▾</span></button><div class="fqa">Yes. Download the CSV, then use: <code>Import-Csv users.csv | ForEach-Object { Set-ADAccountPassword -Identity $_.index -NewPassword (ConvertTo-SecureString $_.password -AsPlainText -Force) }</code>. Always set <code>-ChangePasswordAtLogon $true</code>.</div></div>
+    <div class="fqi"><button class="fqq">Is this safe for production passwords?<span class="farr">▾</span></button><div class="fqa">Yes. Generation uses <code>crypto.getRandomValues()</code> — the browser CSPRNG, seeded from OS hardware entropy. No password is transmitted to any server. Verify in DevTools → Network while generating — zero requests are made.</div></div>
+    <div class="fqi"><button class="fqq">Can I regenerate one password without changing the rest?<span class="farr">▾</span></button><div class="fqa">Yes. Each row has a ↺ button that regenerates only that password using a fresh <code>crypto.getRandomValues()</code> call, leaving all others unchanged.</div></div>
+    <div class="fqi"><button class="fqq">What does NIST recommend for bulk provisioning?<span class="farr">▾</span></button><div class="fqa">NIST SP 800-63B (2025) requires a minimum of 15 characters. For bulk provisioning: generate 16+ characters, distribute via encrypted channel, and set mandatory-change at first login. Periodic rotation without evidence of compromise is explicitly prohibited.</div></div>
+    <div class="fqi"><button class="fqq">What does "exclude ambiguous characters" do?<span class="farr">▾</span></button><div class="fqa">Removes characters that look similar in certain fonts: <code>0</code> / <code>O</code>, <code>1</code> / <code>l</code> / <code>I</code>. Useful when passwords are distributed in print or verbally. Slightly reduces entropy — only enable when readability is required.</div></div>
   </div>
-</div></section>
-<section class="alt"><div class="wrap">
-  <div class="abg2">
-    <div class="abc">
-      <div class="stag">ABOUT</div>
-      <h3>Built for IT professionals and power users</h3>
-      <p>Most password generators are built for individuals creating one password at a time. This tool was built specifically for the IT administrators, developers, and security teams who need to provision credentials at scale — fast, securely, with the right export format for their systems.</p>
-      <p>Technical guidance follows NIST SP 800-63B (July 2025), OWASP Authentication Cheat Sheet, and NCSC UK guidance on password policy. We update promptly when standards change.</p>
-      <p style="font-size:11px;color:var(--t4)">Last reviewed: May 2026 · <a href="blog.html">Read our IT security blog →</a></p>
+</section>
+
+<!-- BLOG PREVIEW -->
+<section class="alt">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:0">
+      <div><div class="stag">📖 IT Admin Guides</div><h2 class="stit">Bulk generation deep dives</h2></div>
+      <a href="blog.html" style="color:var(--p);font-size:12px;font-weight:600;text-decoration:none">All articles →</a>
     </div>
-    <div class="abcard">
-      <h4>Technical Specifications</h4>
-      <ul>
-        <li><span class="tk">✓</span>Web Crypto API <code>getRandomValues()</code> CSPRNG</li>
-        <li><span class="tk">✓</span>Up to 50 passwords per batch</li>
-        <li><span class="tk">✓</span>Length 8–64 chars (NIST SP 800-63B compliant)</li>
-        <li><span class="tk">✓</span>Formats: plain, numbered, CSV, JSON</li>
-        <li><span class="tk">✓</span>Zero server transmission — offline-capable</li>
-        <li><span class="tk">✓</span>Per-row regenerate and copy controls</li>
-        <li><span class="tk">✓</span>Download .txt and .csv without server contact</li>
-        <li><span class="tk">✓</span>GDPR compliant — no personal data collected</li>
-      </ul>
-    </div>
+    <div class="blgg" id="blgp"></div>
   </div>
-</div></section>
-<section><div class="wrap">
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px"><div><div class="stag">BLOG</div><h2 class="stit">IT security guides</h2></div><a href="blog.html" style="color:var(--p);font-size:12px;font-weight:600">All articles →</a></div>
-  <div class="blgg" id="blgp">
-    <div class="blgc"><div class="blgi bi1">⚙️</div><div class="blgb"><div class="blgcat">IT Guide</div><h3>Bulk Password Generation for IT Administrators</h3><p>The complete guide to secure bulk provisioning — format, distribution, audit trail.</p><div class="blgm"><span>6 May 2026</span><a href="blog.html" class="rm">Read →</a></div></div></div>
-    <div class="blgc"><div class="blgi bi2">📋</div><div class="blgb"><div class="blgcat">Security Standards</div><h3>NIST SP 800-63B: What Changed in 2025</h3><p>Mandatory rotation is out. Minimum length is up. What your policy needs to reflect.</p><div class="blgm"><span>2 May 2026</span><a href="blog.html" class="rm">Read →</a></div></div></div>
-    <div class="blgc"><div class="blgi bi3">🖥️</div><div class="blgb"><div class="blgcat">IT Guide</div><h3>Active Directory Bulk Password Reset</h3><p>After a breach, the safe auditable way to reset hundreds of AD passwords via PowerShell.</p><div class="blgm"><span>27 Apr 2026</span><a href="blog.html" class="rm">Read →</a></div></div></div>
-  </div>
-</div></section>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is bulk password generation cryptographically secure?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every password uses crypto.getRandomValues() — the Web Crypto API CSPRNG, the same standard used in TLS and banking systems."}},{"@type":"Question","name":"Does the generator work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, all generation is client-side with no network requests. Works behind corporate firewalls and in air-gapped environments."}},{"@type":"Question","name":"What output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Plain text, numbered list, CSV for Active Directory import, and JSON array for developer scripts."}}]}</script>
-<footer><div class="wrap">
+</section>
+
+<footer>
   <div class="fg">
-    <div class="fb"><a href="/" class="logo"><div class="lico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M13 2L4.09 13H12L11 22l8.91-11H12L13 2z" fill="#a3e635"/></svg></div><span class="ltx" style="font-size:13px">Instant<span style="color:#a3e635">Pass</span></span></a><p>Bulk password generation for IT admins and power users. Free, fast, private.</p></div>
-    <div class="fc"><h4>Tools</h4><ul><li><a href="/">Bulk Generator</a></li><li><a href="#use-cases">Use Cases</a></li></ul></div>
-    <div class="fc"><h4>Resources</h4><ul><li><a href="blog.html">IT Security Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div class="fc"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="cookie-policy.html">Cookies</a></li><li><a href="terms.html">Terms</a></li><li><a href="affiliate-disclosure.html">Affiliates</a></li></ul></div>
+    <div class="fbrand"><a href="/" class="logo" style="text-decoration:none"><span style="font-size:18px">⚡</span><div class="logo-txt" style="font-size:12px"><strong>Instant</strong> Password Generator</div></a><p>Bulk password generation for IT admins. CSPRNG-based. Nothing transmitted.</p></div>
+    <div class="fcc"><h4>Tool</h4><ul><li><a href="/">Generator</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div class="fcc"><h4>Blog</h4><ul><li><a href="blog.html">All Articles</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="fcc"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="cookie-policy.html">Cookies</a></li><li><a href="terms.html">Terms</a></li><li><a href="affiliate-disclosure.html">Affiliates</a></li></ul></div>
   </div>
-  <div class="fbot"><p>© 2026 InstantPasswordGenerator.org · Kokal Operations Ltd, United Kingdom</p><p><a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="affiliate-disclosure.html">Affiliates</a> · <a href="cookie-policy.html">Cookies</a></p></div>
-</div></footer>
+  <div class="fbot"><p>© 2026 InstantPasswordGenerator.org · Kokal Operations Ltd, United Kingdom</p><p><a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="affiliate-disclosure.html">Affiliates</a></p></div>
+</footer>
+
 <script>
 (function(){if(!localStorage.getItem('ipg-ck'))document.getElementById('ck').style.display='block';})();
 function ckC(v){localStorage.setItem('ipg-ck',v);document.getElementById('ck').style.display='none';}
+document.querySelector('.hbg').addEventListener('click',function(){document.getElementById('mn').classList.toggle('op');});
+
+var curFmt='plain',curPwds=[];
+var CS={u:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',l:'abcdefghijklmnopqrstuvwxyz',n:'0123456789',s:'!@#$%^&*()-_=+[]|;:,.?'};
+var AMB='0Ol1I';
+
 function tgl(cb,id){document.getElementById(id).classList.toggle('on',cb.checked);}
-function setC(n,btn){document.getElementById('cnt').value=n;document.querySelectorAll('.pr').forEach(function(b){b.classList.remove('sel');});if(btn)btn.classList.add('sel');}
-var CH={U:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',L:'abcdefghijklmnopqrstuvwxyz',N:'0123456789',S:'!@#$%^&*()-_=+[]{}|;,.<>?'};
-var lastP=[];
-function bcs(){var s='';if(document.getElementById('cu').checked)s+=CH.U;if(document.getElementById('cl').checked)s+=CH.L;if(document.getElementById('cn').checked)s+=CH.N;if(document.getElementById('cs').checked)s+=CH.S;return s||CH.L;}
-function g1(cs,len){var a=new Uint32Array(len),r='';crypto.getRandomValues(a);for(var i=0;i<len;i++)r+=cs[a[i]%cs.length];return r;}
-function doGen(){
-  var cnt=Math.max(1,Math.min(50,parseInt(document.getElementById('cnt').value)||10));
-  var len=Math.max(8,Math.min(64,parseInt(document.getElementById('slen').value)||16));
-  var cs=bcs();var t0=performance.now();lastP=[];
-  for(var i=0;i<cnt;i++)lastP.push(g1(cs,len));
-  var ms=Math.round((performance.now()-t0)*100)/100;
-  document.getElementById('spb').textContent=cnt+' in '+ms+'ms';
-  var h='';lastP.forEach(function(p,i){h+='<div class="pwrow"><span class="pnum">'+(i+1)+'</span><span class="ppwd" id="pp'+i+'">'+p+'</span><button class="prb" onclick="r1('+i+')">↺</button><button class="pcb" id="pcb'+i+'" onclick="c1('+i+')">Copy</button></div>';});
-  document.getElementById('pwlist').innerHTML=h;
-  ['cpa','dlt','dlc','rga','clr'].forEach(function(id){document.getElementById(id).disabled=false;});
+
+document.querySelectorAll('.pr').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.pr').forEach(function(x){x.classList.remove('ac');});
+    this.classList.add('ac');
+    document.getElementById('cnt').value=this.dataset.n;
+  });
+});
+function clearPr(){document.querySelectorAll('.pr').forEach(function(b){b.classList.remove('ac');});}
+
+document.querySelectorAll('.fb').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('ac');});
+    this.classList.add('ac');curFmt=this.dataset.fmt;if(curPwds.length)renderList();
+  });
+});
+
+function buildCS(){
+  var s='';
+  var excAmb=document.getElementById('ca').checked;
+  if(document.getElementById('cu').checked)s+=CS.u;
+  if(document.getElementById('cl').checked)s+=CS.l;
+  if(document.getElementById('cn').checked)s+=CS.n;
+  if(document.getElementById('cs').checked)s+=CS.s;
+  if(!s)s=CS.u+CS.l+CS.n;
+  if(excAmb)AMB.split('').forEach(function(c){s=s.split(c).join('');});
+  return s;
 }
-function r1(i){var len=Math.max(8,Math.min(64,parseInt(document.getElementById('slen').value)||16));lastP[i]=g1(bcs(),len);var el=document.getElementById('pp'+i);if(el)el.textContent=lastP[i];var b=document.getElementById('pcb'+i);if(b){b.textContent='Copy';b.classList.remove('ok');}}
-function c1(i){navigator.clipboard.writeText(lastP[i]).then(function(){var b=document.getElementById('pcb'+i);b.textContent='✓';b.classList.add('ok');setTimeout(function(){b.textContent='Copy';b.classList.remove('ok');},1800);});}
-function fmt(){var f=document.getElementById('fmt').value;if(f==='numbered')return lastP.map(function(p,i){return (i+1)+'. '+p;}).join('\n');if(f==='csv')return 'Index,Password\n'+lastP.map(function(p,i){return (i+1)+','+p;}).join('\n');if(f==='json')return JSON.stringify(lastP,null,2);return lastP.join('\n');}
-function cpAll(){navigator.clipboard.writeText(fmt()).then(function(){var b=document.getElementById('cpa');b.textContent='✓ Copied!';b.classList.add('ok');setTimeout(function(){b.textContent='⎘ Copy All';b.classList.remove('ok');},2000);});}
-function dl(content,name,type){var blob=new Blob([content],{type:type});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);}
-function dlT(){dl(fmt(),'passwords.txt','text/plain');}
-function dlC(){dl('Index,Password\n'+lastP.map(function(p,i){return (i+1)+','+p;}).join('\n'),'passwords.csv','text/csv');}
-function clrAll(){lastP=[];document.getElementById('pwlist').innerHTML='<div class="nores"><h3>Cleared</h3><p>Press ⚡ Generate Instantly</p></div>';document.getElementById('spb').textContent='Ready';['cpa','dlt','dlc','rga','clr'].forEach(function(id){document.getElementById(id).disabled=true;});}
-function faq(btn){var item=btn.parentElement,isOp=item.classList.contains('op');document.querySelectorAll('.fqi').forEach(function(i){i.classList.remove('op');});if(!isOp)item.classList.add('op');}
-fetch('post.json').then(function(r){return r.json();}).then(function(d){if(!d.posts)return;var c=document.getElementById('blgp');c.innerHTML='';d.posts.slice(0,3).forEach(function(p,i){c.innerHTML+='<div class="blgc"><div class="blgi '+['bi1','bi2','bi3'][i%3]+'">'+p.emoji+'</div><div class="blgb"><div class="blgcat">'+p.category+'</div><h3>'+p.title+'</h3><p>'+p.excerpt+'</p><div class="blgm"><span>'+p.date+'</span><a href="blog.html" class="rm">Read &#8594;</a></div></div></div>';});}).catch(function(){});
+function genOne(cs,len){
+  var arr=new Uint32Array(len);crypto.getRandomValues(arr);
+  return Array.from(arr).map(function(n){return cs[n%cs.length];}).join('');
+}
+function doGen(){
+  var cnt=Math.min(50,Math.max(1,parseInt(document.getElementById('cnt').value)||5));
+  var len=Math.min(64,Math.max(8,parseInt(document.getElementById('slen').value)||20));
+  var cs=buildCS();
+  var t0=performance.now();
+  curPwds=[];
+  for(var i=0;i<cnt;i++)curPwds.push(genOne(cs,len));
+  var ms=(performance.now()-t0).toFixed(1);
+  document.getElementById('speed').textContent=cnt+' passwords in '+ms+'ms';
+  document.getElementById('bct').textContent=cnt+' password'+(cnt>1?'s':'');
+  renderList();
+}
+function display(pwd,i){
+  if(curFmt==='numbered')return (i+1)+'. '+pwd;
+  if(curFmt==='csv')return (i+1)+',"'+pwd+'"';
+  if(curFmt==='json')return (i===0?'[':'')+'"'+pwd+'"'+(i<curPwds.length-1?',':']');
+  return pwd;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function renderList(){
+  var list=document.getElementById('pwd-list');list.innerHTML='';
+  curPwds.forEach(function(pwd,i){
+    var row=document.createElement('div');row.className='pr-row';row.setAttribute('role','listitem');
+    row.innerHTML='<span class="pidx">'+(i+1)+'</span><span class="pval">'+esc(display(pwd,i))+'</span><div class="rbs"><button class="rb" onclick="cpRow(this,\''+esc(pwd)+'\')">copy</button><button class="rb" onclick="regenRow('+i+')">↺</button></div>';
+    list.appendChild(row);
+  });
+}
+function cpRow(btn,pwd){navigator.clipboard.writeText(pwd).then(function(){btn.textContent='✓';btn.classList.add('ok');setTimeout(function(){btn.textContent='copy';btn.classList.remove('ok');},1800);});}
+function regenRow(i){var len=Math.min(64,Math.max(8,parseInt(document.getElementById('slen').value)||20));curPwds[i]=genOne(buildCS(),len);renderList();}
+function copyAll(){if(!curPwds.length)return;navigator.clipboard.writeText(curPwds.join('\n')).then(function(){var b=document.querySelector('.bb.pr2');b.textContent='✓ Copied!';setTimeout(function(){b.textContent='Copy All';},2000);});}
+function dl(name,content,type){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:type}));a.download=name;a.click();}
+function dlTxt(){if(curPwds.length)dl('passwords.txt',curPwds.join('\n'),'text/plain');}
+function dlCsv(){if(curPwds.length)dl('passwords.csv','index,password\n'+curPwds.map(function(p,i){return (i+1)+',"'+p+'"';}).join('\n'),'text/csv');}
+function clrAll(){curPwds=[];document.getElementById('pwd-list').innerHTML='<div class="empty"><span>⚡</span><p>Press <strong>Generate</strong> to create passwords.</p></div>';document.getElementById('bct').textContent='';}
+
+document.querySelectorAll('.fqq').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=this.parentElement,isOp=item.classList.contains('op');
+    document.querySelectorAll('.fqi').forEach(function(i){i.classList.remove('op');i.querySelector('.fqq').setAttribute('aria-expanded','false');});
+    if(!isOp){item.classList.add('op');this.setAttribute('aria-expanded','true');}
+  });
+});
+
+fetch('post.json').then(function(r){return r.json();}).then(function(d){
+  var c=document.getElementById('blgp');c.innerHTML='';
+  (d.posts||[]).slice(0,3).forEach(function(p){
+    var a=document.createElement('a');a.href=p.url;a.className='blgc';a.style.textDecoration='none';
+    a.innerHTML='<div class="blgi">'+(p.emoji||'📄')+'</div><div class="blgb"><div class="blgcat">'+(p.category||'')+'</div><h3>'+p.title+'</h3><p>'+(p.excerpt||p.desc||'').substring(0,100)+'…</p><div class="blgm"><span>'+p.date+'</span><span class="rm">read →</span></div></div>';
+    c.appendChild(a);
+  });
+}).catch(function(){});
+
+doGen();
 </script>
-</body></html>
+</body>
+</html>
