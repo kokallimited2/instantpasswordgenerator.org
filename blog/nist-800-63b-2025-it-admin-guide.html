@@ -6,6 +6,7 @@
 <meta name="description" content="NIST July 2025 final raises the minimum to 15 characters and formally prohibits mandatory rotation. Group Policy updates, breach corpus checking, and helpdesk changes covered.">
 <link rel="canonical" href="https://instantpasswordgenerator.org/blog/nist-800-63b-2025-it-admin-guide.html">
 <meta property="og:title" content="NIST SP 800-63B 2025: What IT Admins Actually Need to Change">
+<meta property="og:image" content="https://instantpasswordgenerator.org/assets/img/og-nist-800-63b-2025-it-admin-guide.jpg">
 <meta property="og:description" content="NIST July 2025 final raises the minimum to 15 characters and formally prohibits mandatory rotation. Group Policy updates, breach corpus checking, and helpdesk changes covered.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://instantpasswordgenerator.org/blog/nist-800-63b-2025-it-admin-guide.html">
@@ -81,6 +82,7 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
 @media(max-width:768px){nav{display:none;position:absolute;top:56px;left:0;right:0;background:var(--bg3);padding:10px;flex-direction:column;border-bottom:2px solid var(--p)}nav.op{display:flex}.hbg{display:block}}
 @media(max-width:480px){.fg{grid-template-columns:1fr}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When was the NIST SP 800-63B 2025 final revision published?","acceptedAnswer":{"@type":"Answer","text":"The NIST SP 800-63B Digital Identity Guidelines final 2025 revision was published in July 2025. It raises the minimum password length to 15 characters and formally prohibits mandatory periodic rotation as a SHALL NOT requirement."}},{"@type":"Question","name":"What Group Policy setting controls minimum password length in Windows?","acceptedAnswer":{"@type":"Answer","text":"Navigate to Computer Configuration, Windows Settings, Security Settings, Account Policies, Password Policy. Set the Minimum password length value to 15. This applies to all domain-joined accounts subject to the Default Domain Policy or your custom GPO."}},{"@type":"Question","name":"How does the HIBP k-anonymity API work and why is it safe to use?","acceptedAnswer":{"@type":"Answer","text":"The API accepts only the first 5 characters of a SHA-1 hash of the password. The server returns all hashes matching that prefix. Your code then checks locally whether the full hash appears in the response. The actual password is never transmitted — only a partial hash prefix."}},{"@type":"Question","name":"If I disable mandatory rotation, what triggers a password change?","acceptedAnswer":{"@type":"Answer","text":"Under NIST SP 800-63B 2025, passwords should only be changed when there is evidence of compromise — a breach notification, a failed authentication anomaly, or a user-initiated request. Routine calendar-based rotation is explicitly prohibited."}},{"@type":"Question","name":"Does removing complexity rules reduce security?","acceptedAnswer":{"@type":"Answer","text":"No. Removing composition rules increases security in practice. NIST research shows users respond to complexity requirements with predictable patterns — capital at start, number and symbol at end — that reduce effective entropy far below the theoretical maximum. Length-based requirements produce stronger passwords on average."}}]}</script>
 </head>
 <body>
 <div id="ck"><div class="cki"><p>Essential cookies only. See <a href="/cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
@@ -146,6 +148,15 @@ Enforce password history:  24</pre>
       <li>Update user-facing password policy documentation</li>
     </ul>
     <div style="margin-top:18px"><span class="tag">NIST</span> <span class="tag">800-63B</span> <span class="tag">Group Policy</span> <span class="tag">policy</span></div>
+    
+    <div style="background:rgba(100,80,50,.07);border-left:3px solid #8b5cf6;padding:12px 16px;margin:18px 0;border-radius:0 4px 4px 0">
+      <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8b5cf6;margin-bottom:8px">Related Reading</p>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+<li><a href="/" style="color:#8b5cf6;font-weight:500">NIST-compliant password generation tool</a></li>
+<li><a href="/blog/entropy-length-beats-complexity.html" style="color:#8b5cf6;font-weight:500">why length beats complexity rules</a></li>
+<li><a href="/blog/enterprise-password-reset-automation.html" style="color:#8b5cf6;font-weight:500">scaling a credential reset across the organisation</a></li>
+      </ul>
+    </div>
     <div class="discl">For informational purposes only. Test all scripts in a non-production environment before deployment.</div>
     <div class="nav-btns"><a href="/blog/powershell-bulk-password-scripts.html" class="nav-btn">&larr; PowerShell Scripts for Secure Bulk Password Genera&hellip;</a><a href="/blog/csv-password-pipelines-iam-import.html" class="nav-btn">CSV Password Pipelines: From Bulk Generation to IA&hellip; &rarr;</a></div>
   </article>

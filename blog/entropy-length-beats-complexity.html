@@ -6,6 +6,7 @@
 <meta name="description" content="A 16-character lowercase password has more entropy than an 8-character mixed password. The maths, and why NIST dropped composition rules.">
 <link rel="canonical" href="https://instantpasswordgenerator.org/blog/entropy-length-beats-complexity.html">
 <meta property="og:title" content="Entropy Explained: Why Password Length Beats Complexity Rules">
+<meta property="og:image" content="https://instantpasswordgenerator.org/assets/img/og-entropy-length-beats-complexity.jpg">
 <meta property="og:description" content="A 16-character lowercase password has more entropy than an 8-character mixed password. The maths, and why NIST dropped composition rules.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://instantpasswordgenerator.org/blog/entropy-length-beats-complexity.html">
@@ -81,6 +82,7 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
 @media(max-width:768px){nav{display:none;position:absolute;top:56px;left:0;right:0;background:var(--bg3);padding:10px;flex-direction:column;border-bottom:2px solid var(--p)}nav.op{display:flex}.hbg{display:block}}
 @media(max-width:480px){.fg{grid-template-columns:1fr}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is password entropy and how is it calculated?","acceptedAnswer":{"@type":"Answer","text":"Entropy in bits is calculated as H = L times log base 2 of N, where L is the password length and N is the size of the character pool. A 20-character password drawn from 95 printable ASCII characters has approximately 131 bits of entropy."}},{"@type":"Question","name":"How much entropy is considered sufficient for a strong password?","acceptedAnswer":{"@type":"Answer","text":"Security researchers generally consider 80 bits adequate for current threats and 100 bits very strong. At 131 bits, a 20-character all-class password would take billions of years to brute-force at 100 billion guesses per second."}},{"@type":"Question","name":"Why does NIST SP 800-63B prohibit composition rules?","acceptedAnswer":{"@type":"Answer","text":"Because users respond to composition rules with predictable patterns — capital at the start, number and symbol at the end, minimum changes on each rotation — that reduce the effective entropy far below the theoretical maximum. Length requirements produce more uniformly random password choices."}},{"@type":"Question","name":"What is a dictionary attack and how does length protect against it?","acceptedAnswer":{"@type":"Answer","text":"A dictionary attack tests common words, names, and patterns before exhaustive brute force. Longer passwords are harder to crack with dictionaries because the number of possible combinations grows exponentially with length. An 8-character complex password may exist in a breach corpus; a random 20-character password almost certainly does not."}},{"@type":"Question","name":"What is the difference between a passphrase and a random character password?","acceptedAnswer":{"@type":"Answer","text":"A passphrase uses multiple dictionary words separated by spaces or symbols — correct horse battery staple. A random character password uses CSPRNG-selected characters. Both can achieve 80+ bits of entropy. Passphrases are more memorable; random character passwords are shorter for the same entropy when using a full character set."}}]}</script>
 </head>
 <body>
 <div id="ck"><div class="cki"><p>Essential cookies only. See <a href="/cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
@@ -138,6 +140,15 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
     </ul>
     <div class="callout"><strong>Bulk generation takeaway:</strong> At 20 characters with all character classes the Instant Password Generator produces 131 bits of entropy — computationally infeasible against any realistic attack. Length is your primary security lever, not complexity rules.</div>
     <div style="margin-top:18px"><span class="tag">entropy</span> <span class="tag">NIST</span> <span class="tag">complexity</span> <span class="tag">security</span></div>
+    
+    <div style="background:rgba(100,80,50,.07);border-left:3px solid #8b5cf6;padding:12px 16px;margin:18px 0;border-radius:0 4px 4px 0">
+      <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8b5cf6;margin-bottom:8px">Related Reading</p>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+<li><a href="/" style="color:#8b5cf6;font-weight:500">try a 20-character default in the generator</a></li>
+<li><a href="/blog/nist-800-63b-2025-it-admin-guide.html" style="color:#8b5cf6;font-weight:500">updating your Group Policy to reflect NIST 2025</a></li>
+<li><a href="/blog/bulk-password-generation-active-directory.html" style="color:#8b5cf6;font-weight:500">generating 16-character passwords at scale for Active Directory</a></li>
+      </ul>
+    </div>
     <div class="discl">For informational purposes only. Test all scripts in a non-production environment before deployment.</div>
     <div class="nav-btns"><a href="/blog/enterprise-password-reset-automation.html" class="nav-btn">&larr; Password Reset at Scale: Automating Enterprise Cre&hellip;</a></div>
   </article>

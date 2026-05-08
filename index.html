@@ -7,15 +7,17 @@
 <link rel="canonical" href="https://instantpasswordgenerator.org/">
 <meta property="og:title" content="Instant Bulk Password Generator — CSPRNG, CSV, JSON, Plain Text">
 <meta property="og:description" content="Generate 5, 10, 20 or 50 passwords instantly. CSV export for Active Directory import. Free, client-side CSPRNG — nothing transmitted.">
-<meta property="og:type" content="website"><meta property="og:url" content="https://instantpasswordgenerator.org/">
+<meta property="og:type" content="website"><meta property="og:image" content="https://instantpasswordgenerator.org/assets/img/og-home.jpg">
+<meta property="og:url" content="https://instantpasswordgenerator.org/">
 <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://instantpasswordgenerator.org/assets/img/og-home.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='6' fill='%230d0b1a'/><text x='5' y='28' font-size='22' fill='%238b5cf6'>&#x26A1;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Instant Bulk Password Generator","url":"https://instantpasswordgenerator.org/","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Generate up to 50 cryptographically secure passwords instantly. CSV, JSON, numbered, and plain text output. CSPRNG-based."}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://instantpasswordgenerator.org/","name":"Instant Password Generator"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://instantpasswordgenerator.org/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://instantpasswordgenerator.org/blog.html?q={search_term_string}"},"query-input":"required name=search_term_string"},"name":"Instant Password Generator"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Instant Password Generator","url":"https://instantpasswordgenerator.org/"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many passwords can I generate at once?","acceptedAnswer":{"@type":"Answer","text":"Up to 50 passwords per generation using the count presets (5, 10, 20, 50) or a custom value. All are generated simultaneously using crypto.getRandomValues() in your browser."}},{"@type":"Question","name":"Can I use the CSV output to import into Active Directory?","acceptedAnswer":{"@type":"Answer","text":"Yes. Download the CSV, then use PowerShell Import-Csv and Set-ADAccountPassword to bulk-provision accounts. Always set ChangePasswordAtLogon to $true."}},{"@type":"Question","name":"Is this safe for production passwords?","acceptedAnswer":{"@type":"Answer","text":"Yes. Generation uses crypto.getRandomValues() — the browser CSPRNG seeded from OS hardware entropy. No password is transmitted to any server."}},{"@type":"Question","name":"What output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Four formats: Plain text (one per line), Numbered (1. password), CSV (index,password), and JSON array. Switch format and regenerate at any time."}},{"@type":"Question","name":"What does NIST recommend for bulk provisioning?","acceptedAnswer":{"@type":"Answer","text":"NIST SP 800-63B (2025) requires a minimum of 15 characters. For bulk provisioning, generate 16+ characters and require mandatory change at first login. Periodic rotation without evidence of compromise is explicitly discouraged."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many passwords can I generate at once?","acceptedAnswer":{"@type":"Answer","text":"Up to 50 per generation using the count presets (5, 10, 20, 50) or a custom value. All are generated simultaneously using crypto.getRandomValues() in your browser."}},{"@type":"Question","name":"Can I use the CSV for Active Directory import?","acceptedAnswer":{"@type":"Answer","text":"Yes. Download the CSV, then use: Import-Csv users.csv | ForEach-Object { Set-ADAccountPassword -Identity $_.index -NewPassword (ConvertTo-SecureString $_.password -AsPlainText -Force) }. Always set -ChangePasswordAtLogon $true."}},{"@type":"Question","name":"Is this safe for production passwords?","acceptedAnswer":{"@type":"Answer","text":"Yes. Generation uses crypto.getRandomValues() — the browser CSPRNG. No password is transmitted to any server. Verify in DevTools Network while generating — zero requests are made."}},{"@type":"Question","name":"Can I regenerate one password without changing the rest?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each row has a rotating arrow button that regenerates only that password using a fresh crypto.getRandomValues() call, leaving all others unchanged."}},{"@type":"Question","name":"What does NIST recommend for bulk provisioning?","acceptedAnswer":{"@type":"Answer","text":"NIST SP 800-63B 2025 requires a minimum of 15 characters. For bulk provisioning, generate 16+ characters and set mandatory change at first login. Periodic rotation without evidence of compromise is explicitly prohibited."}},{"@type":"Question","name":"What does exclude ambiguous characters do?","acceptedAnswer":{"@type":"Answer","text":"Removes characters that look similar in some fonts: 0 and O, 1 and l and I. Useful when distributing passwords in print. Slightly reduces entropy — only enable when readability is required."}},{"@type":"Question","name":"What character sets should I use for bulk-provisioned passwords?","acceptedAnswer":{"@type":"Answer","text":"Use all four character classes at 16 or more characters for maximum entropy. Enable exclude ambiguous characters if passwords will be distributed on paper or verbally."}},{"@type":"Question","name":"What is the minimum password length under NIST SP 800-63B 2025?","acceptedAnswer":{"@type":"Answer","text":"NIST SP 800-63B 2025 raised the minimum to 15 characters. Systems must also accept passwords up to 64 characters. The generator defaults to 20 characters — exceeding the minimum on every generation."}},{"@type":"Question","name":"How do I import generated passwords into Okta?","acceptedAnswer":{"@type":"Answer","text":"Okta bulk import accepts a CSV with columns: login, firstName, lastName, password, passwordChanged. Set passwordChanged to FALSE to force users to change the password on first login."}},{"@type":"Question","name":"Is the JSON format compatible with secrets management tools?","acceptedAnswer":{"@type":"Answer","text":"Yes. The JSON format outputs a plain array of password strings compatible with HashiCorp Vault, AWS Secrets Manager, and Azure Key Vault import scripts."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Bulk Generate Secure Passwords","step":[{"@type":"HowToStep","position":1,"name":"Select count","text":"Choose 5, 10, 20, or 50 passwords, or enter a custom value."},{"@type":"HowToStep","position":2,"name":"Set options","text":"Adjust length slider (8–64 chars) and toggle character classes."},{"@type":"HowToStep","position":3,"name":"Choose format","text":"Select Plain, Numbered, CSV, or JSON output."},{"@type":"HowToStep","position":4,"name":"Generate and export","text":"Click Generate, then Copy All or Download .csv for Active Directory import."}]}</script>
 <style>
 :root{--bg:#0d0b1a;--bg2:#110e22;--bg3:#090711;--card:#161226;--card2:#1d1830;--card3:#231e3a;
@@ -155,7 +157,7 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
 <div id="ck"><div class="cki"><p>Essential cookies only — <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
 <header><div class="hi">
   <a href="/" class="logo"><span style="font-size:22px">⚡</span><div class="logo-txt"><strong>Instant</strong> Password Generator<small>Bulk · Secure · Instant</small></div></a>
-  <nav id="mn"><a href="/" class="cur">Generator</a><a href="blog.html">Blog</a><a href="#faq">FAQ</a><a href="contact.html">Contact</a><a href="#tool" class="ncta">Generate Now ↓</a></nav>
+  <nav id="mn"><a href="/" class="cur">Generator</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="#faq">FAQ</a><a href="contact.html">Contact</a><a href="#tool" class="ncta">Generate Now ↓</a></nav>
   <button class="hbg" aria-label="Menu">☰</button>
 </div></header>
 
@@ -253,6 +255,35 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
   </div>
 </section>
 
+
+<!-- SECURITY STANDARDS TABLE (SOP-06 AI-extractable) -->
+<section>
+  <div class="wrap">
+    <div class="stag">📐 Standards</div>
+    <h2 class="stit">Password requirements by framework</h2>
+    <p class="sdesc">Key parameters across the major standards — all auto-configured in the <a href="https://ironvaultkeys.com" rel="noopener" target="_blank">Iron Vault Keys Policy Builder</a>.</p>
+    <div style="overflow-x:auto;margin-top:28px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'JetBrains Mono',monospace">
+      <thead><tr style="background:var(--card2);text-align:left">
+        <th style="padding:9px 12px;color:var(--p);font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--p)">Framework</th>
+        <th style="padding:9px 12px;color:var(--p);font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--p)">Min Length</th>
+        <th style="padding:9px 12px;color:var(--p);font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--p)">Rotation</th>
+        <th style="padding:9px 12px;color:var(--p);font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--p)">Composition Rules</th>
+        <th style="padding:9px 12px;color:var(--p);font-size:10px;letter-spacing:.5px;border-bottom:2px solid var(--p)">Breach Check</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--bd)"><td style="padding:8px 12px;color:var(--t)">NIST SP 800-63B 2025</td><td style="padding:8px 12px;color:var(--acc)">15 chars</td><td style="padding:8px 12px;color:var(--t2)">SHALL NOT (prohibited)</td><td style="padding:8px 12px;color:var(--t2)">SHOULD NOT (discouraged)</td><td style="padding:8px 12px;color:var(--acc)">SHALL (mandatory)</td></tr>
+        <tr style="background:var(--card2);border-bottom:1px solid var(--bd)"><td style="padding:8px 12px;color:var(--t)">PCI-DSS v4.0</td><td style="padding:8px 12px;color:var(--acc)">12 chars</td><td style="padding:8px 12px;color:var(--t2)">90 days (no MFA) / None (MFA)</td><td style="padding:8px 12px;color:var(--t2)">Alpha + numeric required</td><td style="padding:8px 12px;color:var(--t3)">Not specified</td></tr>
+        <tr style="border-bottom:1px solid var(--bd)"><td style="padding:8px 12px;color:var(--t)">ISO/IEC 27001:2022</td><td style="padding:8px 12px;color:var(--t2)">Org-defined</td><td style="padding:8px 12px;color:var(--t2)">Org-defined</td><td style="padding:8px 12px;color:var(--t2)">Org-defined</td><td style="padding:8px 12px;color:var(--t2)">Recommended</td></tr>
+        <tr style="background:var(--card2);border-bottom:1px solid var(--bd)"><td style="padding:8px 12px;color:var(--t)">HIPAA (45 CFR 164)</td><td style="padding:8px 12px;color:var(--t2)">Not specified</td><td style="padding:8px 12px;color:var(--t2)">Periodic recommended</td><td style="padding:8px 12px;color:var(--t2)">Not specified</td><td style="padding:8px 12px;color:var(--t3)">Not specified</td></tr>
+        <tr><td style="padding:8px 12px;color:var(--t)">Cyber Essentials (NCSC)</td><td style="padding:8px 12px;color:var(--acc)">8 chars</td><td style="padding:8px 12px;color:var(--t2)">On compromise only</td><td style="padding:8px 12px;color:var(--t2)">None required</td><td style="padding:8px 12px;color:var(--t3)">Not specified</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:11px;color:var(--t4);margin-top:9px">Sources: NIST SP 800-63B July 2025 · PCI SSC v4.0 March 2022 · ISO/IEC 27001:2022 · HHS HIPAA guidance · NCSC Cyber Essentials 2024. The bulk generator defaults to 20 characters — exceeding all framework minimums simultaneously.</p>
+  </div>
+</section>
+
 <!-- STATS -->
 <section>
   <div class="wrap">
@@ -291,6 +322,10 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
     <div class="fqi"><button class="fqq">Can I regenerate one password without changing the rest?<span class="farr">▾</span></button><div class="fqa">Yes. Each row has a ↺ button that regenerates only that password using a fresh <code>crypto.getRandomValues()</code> call, leaving all others unchanged.</div></div>
     <div class="fqi"><button class="fqq">What does NIST recommend for bulk provisioning?<span class="farr">▾</span></button><div class="fqa">NIST SP 800-63B (2025) requires a minimum of 15 characters. For bulk provisioning: generate 16+ characters, distribute via encrypted channel, and set mandatory-change at first login. Periodic rotation without evidence of compromise is explicitly prohibited.</div></div>
     <div class="fqi"><button class="fqq">What does "exclude ambiguous characters" do?<span class="farr">▾</span></button><div class="fqa">Removes characters that look similar in certain fonts: <code>0</code> / <code>O</code>, <code>1</code> / <code>l</code> / <code>I</code>. Useful when passwords are distributed in print or verbally. Slightly reduces entropy — only enable when readability is required.</div></div>
+    <div class="fqi"><button class="fqq">What character sets should I use for bulk-provisioned AD passwords?<span class="farr">▾</span></button><div class="fqa">Use all four character classes — uppercase, lowercase, numbers, and symbols — at 16+ characters. Enable "exclude ambiguous characters" if passwords will be distributed on paper or read aloud. This removes 0, O, l, 1, and I but reduces entropy only marginally at longer lengths.</div></div>
+    <div class="fqi"><button class="fqq">What is the minimum password length under NIST SP 800-63B 2025?<span class="farr">▾</span></button><div class="fqa">The NIST SP 800-63B 2025 final revision (July 2025) raises the minimum memorised secret length to 15 characters. Systems must also accept passwords up to 64 characters. The generator defaults to 20 characters — exceeding the minimum on every generation.</div></div>
+    <div class="fqi"><button class="fqq">How do I import generated passwords into Okta?<span class="farr">▾</span></button><div class="fqa">Okta bulk import accepts a CSV with columns: login, firstName, lastName, password, passwordChanged. Set passwordChanged to FALSE to force users to change the password on first login. Import via Admin Console → Directory → People → Import. See the <a href="/blog/csv-password-pipelines-iam-import.html" style="color:var(--p)">CSV pipeline guide</a> for full column schema.</div></div>
+    <div class="fqi"><button class="fqq">Is the JSON output format compatible with secrets management tools?<span class="farr">▾</span></button><div class="fqa">Yes. The JSON format outputs a plain array of password strings — compatible with HashiCorp Vault, AWS Secrets Manager, and Azure Key Vault import scripts. Wrap the array in your target secret key structure before importing.</div></div>
   </div>
 </section>
 
@@ -305,11 +340,36 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:36px 0 18px}
   </div>
 </section>
 
+
+<!-- ABOUT / E-E-A-T SECTION -->
+<section class="alt">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start">
+      <div>
+        <div class="stag">👤 About</div>
+        <h2 class="stit">Written by IT security practitioners</h2>
+        <p style="color:var(--t3);font-size:.9rem;line-height:1.8;margin-bottom:14px">The guides and tool on this site are written by <strong>Alex Chen</strong>, an IT security specialist with over a decade of experience in enterprise credential management, Active Directory automation, and NIST SP 800-63B implementation across UK and US enterprise environments.</p>
+        <p style="color:var(--t3);font-size:.9rem;line-height:1.8;margin-bottom:18px">All technical claims are sourced from primary documents — NIST publications, NCSC advisories, Verizon DBIR, and IBM Cost of Data Breach Report. Content is reviewed whenever security standards evolve.</p>
+        <a href="about.html" style="display:inline-block;background:var(--p);color:#fff;padding:8px 18px;border-radius:var(--rad);font-size:12px;font-weight:700;text-decoration:none">Read more about us →</a>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bd);border-top:2px solid var(--p);border-radius:var(--radl);padding:20px">
+        <div style="font-size:9px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px">Trust signals</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;flex-shrink:0">✓</span><span style="font-size:12px;color:var(--t2)">All generation uses <code>crypto.getRandomValues()</code> — no server contact</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;flex-shrink:0">✓</span><span style="font-size:12px;color:var(--t2)">Aligned with NIST SP 800-63B 2025, PCI-DSS v4.0, ISO/IEC 27001</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;flex-shrink:0">✓</span><span style="font-size:12px;color:var(--t2)">No display advertising — affiliate links disclosed per ASA/FTC rules</span></div>
+          <div style="display:flex;gap:9px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;flex-shrink:0">✓</span><span style="font-size:12px;color:var(--t2)">Operated by Kokal Operations Ltd, registered in England and Wales</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="fg">
     <div class="fbrand"><a href="/" class="logo" style="text-decoration:none"><span style="font-size:18px">⚡</span><div class="logo-txt" style="font-size:12px"><strong>Instant</strong> Password Generator</div></a><p>Bulk password generation for IT admins. CSPRNG-based. Nothing transmitted.</p></div>
     <div class="fcc"><h4>Tool</h4><ul><li><a href="/">Generator</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div class="fcc"><h4>Blog</h4><ul><li><a href="blog.html">All Articles</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="fcc"><h4>Blog</h4><ul><li><a href="blog.html">All Articles</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     <div class="fcc"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="cookie-policy.html">Cookies</a></li><li><a href="terms.html">Terms</a></li><li><a href="affiliate-disclosure.html">Affiliates</a></li></ul></div>
   </div>
   <div class="fbot"><p>© 2026 InstantPasswordGenerator.org · Kokal Operations Ltd, United Kingdom</p><p><a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="affiliate-disclosure.html">Affiliates</a></p></div>
