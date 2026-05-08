@@ -51,6 +51,7 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:34px 0 16px}
 .fbot p,.fbot a{font-size:10px;color:var(--t4);text-decoration:none}.fbot a:hover{color:var(--p)}
 @media(max-width:768px){nav{display:none;position:absolute;top:56px;left:0;right:0;background:var(--bg3);padding:10px;flex-direction:column;border-bottom:2px solid var(--p)}nav.op{display:flex}.hbg{display:block}.fg{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.fg{grid-template-columns:1fr}}
+@media(max-width:600px){[style*="grid-template-columns:1fr 1.3fr"]{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -95,7 +96,6 @@ footer{background:var(--bg3);border-top:2px solid var(--p);padding:34px 0 16px}
     </form>
   </div>
 </div>
-@media(max-width:600px){[style*="grid-template-columns:1fr 1.3fr"]{grid-template-columns:1fr}}
 <script>
 document.getElementById('cf').addEventListener('submit',function(e){e.preventDefault();var ok=true;
 ['fn','em','sb','mg'].forEach(function(id){var el=document.getElementById(id);if(!el.value.trim()){el.style.borderColor='#ef4444';ok=false;}else el.style.borderColor='';;});
